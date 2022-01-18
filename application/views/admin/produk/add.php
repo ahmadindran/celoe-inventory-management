@@ -6,7 +6,8 @@
                     Tambah Produk
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
+
                         <div class="mb-3 row">
                             <label for="produk" class="col-sm-2 col-form-label">ID</label>
                             <div class="col-sm-10">
@@ -14,6 +15,7 @@
                                 <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
+
                         <div class="mb-3 row">
                             <label for="produk" class="col-sm-2 col-form-label">Nama Produk</label>
                             <div class="col-sm-10">
@@ -21,6 +23,7 @@
                                 <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
+
                         <div class="mb-3 row">
                             <label for="produk" class="col-sm-2 col-form-label">Brand</label>
                             <div class="col-sm-10">
@@ -35,6 +38,7 @@
                                 <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
+
                         <div class="mb-3 row">
                             <label for="produk" class="col-sm-2 col-form-label">Kategori</label>
                             <div class="col-sm-10">
@@ -49,6 +53,7 @@
                                 <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
+
                         <div class="mb-3 row">
                             <label for="produk" class="col-sm-2 col-form-label">Stock</label>
                             <div class="col-sm-10">
@@ -56,6 +61,7 @@
                                 <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
+
                         <div class="mb-3 row">
                             <label for="produk" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">
@@ -63,6 +69,14 @@
                                     <option value="1">Tersedia</option>
                                     <option value="2">Tidak</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="produk" class="col-sm-2 col-form-label">Upload Foto</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="file" name="file" type="file" placeholder="Foto">
+                                <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
 
