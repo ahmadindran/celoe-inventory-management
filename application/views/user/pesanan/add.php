@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-md-center">
-        <div class="col-md-6">
+        <div class="col-9">
             <div class="card">
                 <div class="card-header">
                     Tambah Pesanan
@@ -52,7 +52,7 @@
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-danger">Save</button>
                             <button type="button" class="btn btn-light">Cancel</button>
-                        </div>      
+                        </div>
                     </form>
                 </div>
             </div>

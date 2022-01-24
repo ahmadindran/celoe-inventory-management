@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-md-center">
-        <div class="col-md-6">
+        <div class="col-9">
             <div class="card">
                 <div class="card-header">
                     Tambah Produk

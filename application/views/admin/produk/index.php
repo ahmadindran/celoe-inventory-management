@@ -60,7 +60,7 @@
                         if ($pdk['status'] == "1") { ?>
                             <div class="col-md-4">
                                 <div class="card">
-                                <img class="img-fluid" src="<?php echo base_url() ?>assets/upload/produk/<?= $pdk['foto'] ?>" alt="">
+                                    <img class="img-fluid" src="<?php echo base_url() ?>assets/upload/produk/<?= $pdk['foto'] ?>" alt="">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $pdk['id'] ?> - <?= $pdk['nama'] ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted"><?= $pdk['categories'] ?> - <?= $pdk['brand'] ?></h6>
