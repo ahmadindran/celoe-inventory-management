@@ -1,4 +1,3 @@
-<?= var_dump($pesanan) ?>
 <div class="container">
     <h3>Pesanan</h3>
     <div class="row">
@@ -11,7 +10,7 @@
                 </div>
             <?php endif; ?>
 
-            <a type="button" href="<?php echo base_url() ?>admin/pesanan/tambah" class="btn btn-primary">Tambah Pesanan</a>
+            <a type="button" href="<?php echo base_url() ?>user/pesanan/tambah" class="btn btn-primary">Tambah Pesanan</a>
             <div class="container">
 
                 <table class="table table-striped" id="managepesananTable">
@@ -22,7 +21,7 @@
                             </trb>
                     </thead>
                     <tbody>
-                        <?php foreach ($pesanan as $psn) : ?>
+                        <!-- <?php foreach ($pesanan as $psn) : ?>
                             <?php if ($psn['status'] == "1") { ?>
                                 <tr>
                                     <td><?= $psn['pesanan'] ?></td>
@@ -41,8 +40,8 @@
                                         </a>
                                     </td>
                                 </tr>
-                            <?php } ?>
-                        <?php endforeach; ?>
+                            <?php }
+                                endforeach; ?> -->
                     </tbody>
                 </table>
 

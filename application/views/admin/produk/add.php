@@ -12,7 +12,7 @@
                             <label for="produk" class="col-sm-2 col-form-label">ID</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="id" name="id" type="text" placeholder="ID">
-                                <div class="form-text text-danger"><?= form_error('produk'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('id'); ?></div>
                             </div>
                         </div>
 
@@ -20,7 +20,7 @@
                             <label for="produk" class="col-sm-2 col-form-label">Nama Produk</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="nama" name="nama" type="text" placeholder="Produk">
-                                <div class="form-text text-danger"><?= form_error('produk'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('nama'); ?></div>
                             </div>
                         </div>
 
@@ -30,12 +30,10 @@
                                 <select class="form-select" name="brand" id="brand">
                                     <?php foreach ($brand as $brnd) : ?>
                                         <?php if ($brnd['status'] == "1") { ?>
-                                            <option value="<?= $brnd['brand'] ?>"><?= $brnd['brand'] ?></option>
+                                            <option value="<?= $brnd['id'] ?>"><?= $brnd['brand'] ?></option>
                                     <?php  }
                                     endforeach; ?>
                                 </select>
-                                <!-- <input class="form-control" id="brand" name="brand" type="text" placeholder="Brand"> -->
-                                <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
 
@@ -45,12 +43,10 @@
                                 <select class="form-select" name="kategori" id="kategori">
                                     <?php foreach ($kategori as $ctg) : ?>
                                         <?php if ($ctg['status'] == "1") { ?>
-                                            <option value="<?= $ctg['categories'] ?>"><?= $ctg['categories'] ?></option>
+                                            <option value="<?= $ctg['id'] ?>"><?= $ctg['categories'] ?></option>
                                     <?php  }
                                     endforeach; ?>
                                 </select>
-                                <!-- <input class="form-control" id="kategori" name="kategori" type="text" placeholder="Kategori"> -->
-                                <div class="form-text text-danger"><?= form_error('produk'); ?></div>
                             </div>
                         </div>
 
@@ -58,7 +54,7 @@
                             <label for="produk" class="col-sm-2 col-form-label">Stock</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="stock" name="stock" type="number" placeholder="Stok">
-                                <div class="form-text text-danger"><?= form_error('produk'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('stock'); ?></div>
                             </div>
                         </div>
 
@@ -76,7 +72,7 @@
                             <label for="produk" class="col-sm-2 col-form-label">Upload Foto</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="file" name="file" type="file" placeholder="Foto">
-                                <div class="form-text text-danger"><?= form_error('produk'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('file'); ?></div>
                             </div>
                         </div>
 

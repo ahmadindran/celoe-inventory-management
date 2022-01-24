@@ -22,12 +22,10 @@ class Produk extends CI_Controller
 
     function tambah()
     {
-        // $img = $_FILES['file'];
-        $img = 'assets/uploads/' . $this->input->post('id');
         $config['allowed_types'] = 'jpg|png';
         $config['upload_path'] = 'assets/upload/produk/';
-        $config['remove_space'] = TRUE;
-        $config['max_size'] = 50000;
+        $config['encrypt_name'] = TRUE;
+        $config['max_size'] = 2048;
         $this->upload->initialize($config);
         $this->load->library('upload', $config);
 
@@ -46,14 +44,13 @@ class Produk extends CI_Controller
             $this->load->view('admin/produk/add');
             $this->load->view('templates/footer');
         } else {
-            $this->upload->do_upload('file');
             $gambar = $this->upload->data();
             $gambar = $gambar['file_name'];
             $input = array(
                 "id" => $this->input->post('id', true),
                 "nama" => $this->input->post('nama', true),
-                "brand" => $this->input->post('brand', true),
-                "kategori" => $this->input->post('kategori', true),
+                "brand_id" => $this->input->post('brand', true),
+                "kategori_id" => $this->input->post('kategori', true),
                 "stock" => $this->input->post('stock', true),
                 "aktif" => $this->input->post('active', true),
                 "status" => '1',
@@ -67,6 +64,13 @@ class Produk extends CI_Controller
 
     function ubah($id)
     {
+        $config['allowed_types'] = 'jpg|png';
+        $config['upload_path'] = 'assets/upload/produk/';
+        $config['encrypt_name'] = TRUE;
+        $config['max_size'] = 2048;
+        $this->upload->initialize($config);
+        $this->load->library('upload', $config);
+
         $data['judul'] = "Edit Produk";
         $data['produk'] = $this->Produk_model->getProdukById($id);
         $data['brand'] = $this->Produk_model->getBrandForProduk();
@@ -74,14 +78,28 @@ class Produk extends CI_Controller
         $this->form_validation->set_rules('id-new', 'ID', 'required');
         $this->form_validation->set_rules('nama', 'Nama Produk', 'required');
         $this->form_validation->set_rules('stock', 'Stock', 'required');
-        if ($this->form_validation->run() == FALSE) {
+
+        if ($this->form_validation->run() == FALSE && !$this->upload->do_upload('file')) {
             $this->load->view('templates/header', $data);
             $this->load->view('admin/navbar');
             $this->load->view('admin/produk/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Produk_model->editDataProduk();
-            $this->session->set_flashdata('brand', 'Diubah');
+            // $gambar = $this->upload->data();
+            // $gambar = $gambar['file_name'];
+            $input = array(
+                "id" => $this->input->post('id-new', true),
+                "nama" => $this->input->post('nama', true),
+                "brand_id" => $this->input->post('brand', true),
+                "kategori_id" => $this->input->post('kategori', true),
+                "stock" => $this->input->post('stock', true),
+                "aktif" => $this->input->post('active', true),
+                "status" => '1',
+                // "foto" => $gambar
+            );
+
+            $this->Produk_model->editDataProduk($input);
+            $this->session->set_flashdata('produk', 'Diubah');
             redirect('admin/produk/index');
         }
     }
@@ -90,6 +108,6 @@ class Produk extends CI_Controller
     {
         $this->Produk_model->deleteDataProduk($id);
         $this->session->set_flashdata('brand', 'Dihapus');
-        redirect('admin/brand/index');
+        redirect('admin/produk/index');
     }
 }
