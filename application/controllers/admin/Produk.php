@@ -22,10 +22,10 @@ class Produk extends CI_Controller
 
     function tambah()
     {
-        $config['allowed_types'] = 'jpg|png';
+        $config['allowed_types'] = 'jpeg|jpg|png';
         $config['upload_path'] = 'assets/upload/produk/';
         $config['encrypt_name'] = TRUE;
-        $config['max_size'] = 2048;
+        $config['max_size'] = 2048000;
         $this->upload->initialize($config);
         $this->load->library('upload', $config);
 
@@ -38,7 +38,7 @@ class Produk extends CI_Controller
         $this->form_validation->set_rules('file', 'Foto', 'required');
 
         if ($this->form_validation->run() == FALSE && !$this->upload->do_upload('file')) {
-            // print_r($this->upload->display_errors());
+                print_r($this->upload->display_errors());
             $this->load->view('templates/header', $data);
             $this->load->view('admin/navbar');
             $this->load->view('admin/produk/add');

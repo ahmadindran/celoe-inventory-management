@@ -31,7 +31,7 @@
                                 <select class="form-select" name="brand" id="brand">
                                     <?php foreach ($brand as $brnd) : ?>
                                         <?php if ($brnd['status'] == "1") { ?>
-                                            <option value="<?= $brnd['brand'] ?>" <?php if ($produk['brand'] == $brnd['brand']) {
+                                            <option value="<?= $brnd['id'] ?>" <?php if ($produk['brand_id'] == $brnd['id']) {
                                                                                         echo 'selected="selected"';
                                                                                     } ?>><?= $brnd['brand'] ?></option>
                                     <?php  }
@@ -48,7 +48,7 @@
                                 <select class="form-select" name="kategori" id="kategori">
                                     <?php foreach ($kategori as $ctg) : ?>
                                         <?php if ($ctg['status'] == "1") { ?>
-                                            <option value="<?= $ctg['categories'] ?>" <?php if ($produk['kategori'] == $ctg['categories']) {
+                                            <option value="<?= $ctg['id'] ?>" <?php if ($produk['kategori_id'] == $ctg['id']) {
                                                                                             echo 'selected="selected"';
                                                                                         } ?>><?= $ctg['categories'] ?></option>
                                     <?php  }
