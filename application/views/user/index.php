@@ -1,10 +1,51 @@
 <div class="container">
-    <div class="row row-cols-4">
-        <div class="alert alert-danger" role="alert">
-            Total Pinjaman : 0
+
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <div class="alert alert-danger" role="alert">
+                Total Pinjaman : 0
+            </div>
+        </div>
+        <div class="col-4">
+            <form action="<?= base_url('user/homepage') ?>" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="keyword" autocomplete="off" autofocus>
+                    <div class="input-group-append">
+                        <input class="btn btn-primary" type="submit" name="submit">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="row">
+
+    <div class="container">
+        <div class="row">
+            <?php foreach ($produk as $pdk) :
+                if ($pdk['status'] == "1") { ?>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="img-fluid" src="<?php echo base_url() ?>assets/upload/produk/<?= $pdk['foto'] ?>" alt="" width="500px" height="500px">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $pdk['id'] ?> - <?= $pdk['nama'] ?></h5>
+                                <h6 class="card-subtitle mb-2 text-muted"><?= $pdk['kategori_id'] ?> - <?= $pdk['brand_id'] ?></h6>
+                                <p class="card-text"><?php if ($pdk['aktif'] == "1") {
+                                                            echo 'Tersedia';
+                                                        } else {
+                                                            echo 'Tidak Tersedia';
+                                                        }  ?></p>
+                                <p class="text-end">Stock <?= $pdk['stock'] ?></p>
+
+                            </div>
+                        </div>
+                    </div>
+            <?php }
+            endforeach; ?>
+        </div>
+    </div>
+
+    <?= $this->pagination->create_links(); ?>
+
+    <!-- <div class="row">
         <div class="col-md-4">
             <div class="card text-center">
                 <img class="img-fluid" src="<?php echo base_url() ?>assets/upload/sony a6000.jpg" alt="">
@@ -40,9 +81,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <nav aria-label="Page navigation example">
+    <!-- <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -58,5 +99,5 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
 </div>
