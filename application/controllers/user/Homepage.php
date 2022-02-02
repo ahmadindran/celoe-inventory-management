@@ -19,7 +19,7 @@ class Homepage extends CI_Controller
             redirect('login');
         }
 
-        if ($this->input->post('submit')) {
+        if (isset($_POST['submit'])) {
             $data['keyword'] = $this->input->post('keyword');
             $this->session->get_userdata('keyword', $data['keyword']);
         } else {
@@ -65,7 +65,6 @@ class Homepage extends CI_Controller
         $config['num_tag_close'] = '</li>';
 
         $config['attributes'] = array('class' => 'page-link');
-
 
         $this->pagination->initialize($config);
 

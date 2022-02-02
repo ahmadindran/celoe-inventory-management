@@ -11,7 +11,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="keyword" autocomplete="off" autofocus>
                     <div class="input-group-append">
-                        <input class="btn btn-primary" type="submit" name="submit">
+                        <button type="submit" class="btn btn-danger" name="submit"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </form>
