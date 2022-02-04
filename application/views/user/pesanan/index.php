@@ -11,6 +11,9 @@
             <?php endif; ?>
 
             <a type="button" href="<?php echo base_url() ?>user/pesanan/tambah" class="btn btn-primary">Tambah Pesanan</a>
+            <a type="button" href="<?php echo base_url() ?>user/pesanan/printAll" class="btn btn-primary"target="_blank">Print Semua Berita</a>
+            <a type="button" href="<?php echo base_url() ?>user/pesanan/printPenyerahan" class="btn btn-primary"target="_blank">Print Penyerahan</a>
+            <a type="button" href="<?php echo base_url() ?>user/pesanan/printPengembalian" class="btn btn-primary"target="_blank">Print Pengembalian</a>
             <div class="container">
 
                 <table class="table table-striped" id="managepesananTable">
