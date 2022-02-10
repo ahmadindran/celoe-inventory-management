@@ -1,12 +1,7 @@
-<style>
-    .star img {
-        visibility: visible;
-    }
-</style>
 <table align="center" cellpadding="0" cellspacing="0" style="width: 100%;border:1px solid black;margin-bottom: 10px;">
     <tbody>
         <tr>
-            <td colspan="5" style="text-align:center;color: red;text-decoration: underline; font-size: 25px;">BERITA SERAH TERIMA</td>
+            <td colspan="5" style="text-align:center;color: red;text-decoration: underline; font-weight: bold; font-size: 25px;">BERITA SERAH TERIMA</td>
         </tr>
         <tr>
             <td colspan="5" style="text-align:center;color: red;text-decoration: underline; font-size: 25px;">PENGEMBALIAN BARANG</td>
@@ -22,13 +17,13 @@
             <td colspan="3" style=" text-align: right;color: red;font-style: italic;font-weight: 600;text-decoration: underline;font-size: 25px;">CeLOE</td>
         </tr>
         <tr>
-            <td colspan="3" style=" text-align: right;">Jln.Telekomunikasi Nomor 1,</td>
+            <td colspan="3" style=" text-align: right;">Jl.Telekomunikasi Nomor 1,</td>
         </tr>
         <tr>
             <td colspan="3" style=" text-align: right;">Bandung,Jawa Barat</td>
         </tr>
         <tr>
-            <td colspan="3" style=" text-align: right;">Tele: 1234567890,1478523690.</td>
+            <td colspan="3" style=" text-align: right;">Telp: 1234567890</td>
         </tr>
         <tr>
             <td colspan="3" style=" text-align: right;">Email: Telkomuniversity@email.co.in</td>
@@ -123,10 +118,10 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>TTD Pihak CeLOE</td>
+                        <td style="text-align: center;">TTD Pihak CeLOE</td>
                     </tr>
-                    <tr style="width: 100px; height: 100px;">
-                        <td></td>
+                    <tr style="height: 100px;">
+                        <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">
@@ -140,10 +135,10 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>TTD Pihak Unit / peminjam</td>
+                        <td style="text-align: center;">TTD Pihak Unit / Peminjam</td>
                     </tr>
-                    <tr style="width: 100px; height: 100px;">
-                        <td></td>
+                    <tr style="height: 100px;">
+                        <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">

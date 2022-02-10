@@ -7,10 +7,21 @@ class Kategori extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Kategori_model');
+        if (!$this->session->userdata('logged_in')) {
+            $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
+            $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
+            redirect('login');
+        }
     }
 
     function index()
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $this->load->model('Kategori_model');
         $data['judul'] = "Admin Kategori";
         $data['kategori'] = $this->Kategori_model->getAllKategori();
@@ -22,6 +33,12 @@ class Kategori extends CI_Controller
 
     function tambah()
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $data['judul'] = "Add Kategori";
         $this->form_validation->set_rules('kategori', 'Kategori', 'required');
         if ($this->form_validation->run() == FALSE) {
@@ -38,6 +55,12 @@ class Kategori extends CI_Controller
 
     function ubah($id)
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $data['judul'] = "Edit Kategori";
         $data['kategori'] = $this->Kategori_model->getKategoriById($id);
         $this->form_validation->set_rules('kategori', 'kategori', 'required');

@@ -7,10 +7,21 @@ class Brand extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Brand_model');
+        if (!$this->session->userdata('logged_in')) {
+            $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
+            $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
+            redirect('login');
+        }
     }
 
     function index()
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $this->load->model('Brand_model');
         $data['judul'] = "Admin Brand";
         $data['brand'] = $this->Brand_model->getAllBrand();
@@ -22,6 +33,12 @@ class Brand extends CI_Controller
 
     function tambah()
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $data['judul'] = "Add Brand";
         $this->form_validation->set_rules('brand', 'Brand', 'required');
         if ($this->form_validation->run() == FALSE) {
@@ -38,6 +55,12 @@ class Brand extends CI_Controller
 
     function ubah($id)
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $data['judul'] = "Edit Brand";
         $data['brand'] = $this->Brand_model->getBrandById($id);
         $this->form_validation->set_rules('brand', 'Brand', 'required');

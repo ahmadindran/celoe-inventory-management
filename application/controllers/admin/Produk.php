@@ -7,6 +7,11 @@ class Produk extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Produk_model');
+        if (!$this->session->userdata('logged_in')) {
+            $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
+            $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
+            redirect('login');
+        }
     }
 
     function index()
@@ -38,7 +43,7 @@ class Produk extends CI_Controller
         $this->form_validation->set_rules('file', 'Foto', 'required');
 
         if ($this->form_validation->run() == FALSE && !$this->upload->do_upload('file')) {
-                print_r($this->upload->display_errors());
+            print_r($this->upload->display_errors());
             $this->load->view('templates/header', $data);
             $this->load->view('admin/navbar');
             $this->load->view('admin/produk/add');

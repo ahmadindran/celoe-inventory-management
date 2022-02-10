@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
 
                         <div class="mb-3 row">
                             <label for="deskripsi" class="col-sm-2 col-form-label">Tanggal Pemesanan</label>
@@ -21,7 +21,7 @@
                             <label for="deskripsi" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="nama" name="nama" type="text" placeholder="Nama">
-                                <div class="form-text text-danger"><?= form_error('tgl'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('nama'); ?></div>
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
                             <label for="deskripsi" class="col-sm-2 col-form-label">NIP</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="nip" name="nip" type="number" placeholder="NIP">
-                                <div class="form-text text-danger"><?= form_error('tgl'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('nip'); ?></div>
                             </div>
                         </div>
 
@@ -37,7 +37,7 @@
                             <label for="deskripsi" class="col-sm-2 col-form-label">Unit Pemesan</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="unit" name="unit" type="text" placeholder="Unit Pemesan">
-                                <div class="form-text text-danger"><?= form_error('tgl'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('unit'); ?></div>
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@
                             <label for="nde" class="col-sm-2 col-form-label">Upload NDE</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="nde" name="nde" type="file" placeholder="NDE">
-                                <div class="form-text text-danger"><?= form_error('file'); ?></div>
+                                <div class="form-text text-danger"><?= form_error('nde'); ?></div>
                             </div>
                         </div>
 
@@ -105,7 +105,7 @@
                                         <?php  }
                                         endforeach; ?>
                                     </select>
-                                    <input type="number" disabled>
+                                    <!-- <p id="available_quantity<?php echo $x; ?>"></p> -->
                                     <input type="number" name="banyak" id="banyak">
                                     <div class="input-group-addon ml-3">
                                         <a href="javascript:void(0)" class="btn btn-warning addMore"><i class="bi bi-plus"></i></a>
@@ -147,7 +147,7 @@
                         </div> -->
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="submit" class="btn btn-danger print">Save</button>
+                            <button type="submit" class="btn btn-danger print" name="submit">Save</button>
                             <button type="button" class="btn btn-light">Cancel</button>
                         </div>
 
@@ -177,10 +177,6 @@
         //remove fields group
         $("body").on("click", ".remove", function() {
             $(this).parents(".fieldGroup").remove();
-        });
-
-        $(".print").click(function() {
-            window.print();
         });
     });
 </script>

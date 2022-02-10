@@ -7,10 +7,21 @@ class Feedback extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Feedback_model');
+        if (!$this->session->userdata('logged_in')) {
+            $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
+            $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
+            redirect('login');
+        }
     }
 
     function index()
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $this->load->model('Feedback_model');
         $data['judul'] = "Admin Feedback";
         $data['feedback'] = $this->Feedback_model->getAllFeedback();
@@ -22,6 +33,12 @@ class Feedback extends CI_Controller
 
     function tambah()
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+
         $data['judul'] = "Add Feedback";
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
         $this->form_validation->set_rules('link_admin', 'Link Admin', 'required');
@@ -40,6 +57,12 @@ class Feedback extends CI_Controller
 
     function ubah($id)
     {
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "2") {
+            redirect('user/Homepage');
+        }
+        
         $data['judul'] = "Edit Feedback";
         $data['feedback'] = $this->Feedback_model->getFeedbackById($id);
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');

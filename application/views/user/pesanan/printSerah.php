@@ -1,18 +1,13 @@
-<style>
-    .star img {
-        visibility: visible;
-    }
-</style>
 <table align="center" cellpadding="0" cellspacing="0" style="width: 100%;border:1px solid black;margin-bottom: 10px;">
     <tbody>
         <tr>
-            <td colspan="5" style="text-align:center;color: red;text-decoration: underline;    font-size: 25px;">BERITA SERAH TERIMA</td>
+            <td colspan="5" style="text-align:center;color: red;text-decoration: underline; font-weight: bold; font-size: 25px;">BERITA SERAH TERIMA</td>
         </tr>
         <tr>
             <td colspan="5" style="text-align:center;color: red;text-decoration: underline; font-size: 25px;">PENYERAHAN BARANG</td>
         </tr>
         <tr>
-            <td rowspan="8" colspan="2" style="border-left:1px solid black;" background-image="celo2.png"><img src="<?= base_url('/assets/image/celoe.png') ?>" alt="logo" width="250px;"></td>
+            <td rowspan="8" colspan="2" style="border-left:1px solid black;" background-image="celo2.png"><img src="<?= base_url('/assets/image/celoe.png') ?>" alt="logo" width="35%;"></td>
             <td colspan="3" style=" text-align: center;">ORIGINAL</td>
         </tr>
         <tr>
@@ -22,13 +17,13 @@
             <td colspan="3" style=" text-align: right;color: red;font-style: italic;font-weight: 600;text-decoration: underline;font-size: 25px;">CeLOE</td>
         </tr>
         <tr>
-            <td colspan="3" style=" text-align: right;">Jln.Telekomunikasi Nomor 1,</td>
+            <td colspan="3" style=" text-align: right;">Jl.Telekomunikasi Nomor 1,</td>
         </tr>
         <tr>
             <td colspan="3" style=" text-align: right;">Bandung,Jawa Barat</td>
         </tr>
         <tr>
-            <td colspan="3" style=" text-align: right;">Tele: 1234567890,1478523690.</td>
+            <td colspan="3" style=" text-align: right;">Telp: 1234567890</td>
         </tr>
         <tr>
             <td colspan="3" style=" text-align: right;">Email: Telkomuniversity@email.co.in</td>
@@ -65,7 +60,7 @@
                 <table align="left" cellpadding="0" cellspacing="0" style="width: 100%">
                     <tbody>
                         <tr>
-                            <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;border-top: 1px solid black;border-right: 1px solid black;color: red;">Bill No : ABCXXXXXX01</td>
+                            <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;border-top: 1px solid black;border-right: 1px solid black;color: red;">Bill No : 123456789012345</td>
                         </tr>
                         <tr>
                             <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;border-right: 1px solid black;    color: red;">Tanggal: <?= date("d/m/Y") ?></td>
@@ -112,6 +107,46 @@
         </tr> -->
     </tbody>
 </table>
+
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">TTD Pihak CeLOE</td>
+                    </tr>
+                    <tr style="height: 100px;">
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            ___________________
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">TTD Pihak Unit / Peminjam</td>
+                    </tr>
+                    <tr style="height: 100px;">
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            ____________________________
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="page-break-before: always;"></p>
+        </div>
+    </div>
+</div>
 
 <script>
     window.print();

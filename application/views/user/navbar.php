@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="<?php echo base_url() ?>admin/homepage">
+        <a class="navbar-brand" href="<?php echo base_url() ?>user/homepage">
             <img src="<?php echo base_url('assets/image/celoe.png') ?>" alt="" width="120" height="40">
         </a>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup">

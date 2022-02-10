@@ -9,14 +9,23 @@ class Homepage extends CI_Controller
         parent::__construct();
         $this->load->model('Homepage_model');
         $this->load->library('pagination');
+        if (!$this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $level = $session_data['level'];
+            if ($level == '1') {
+                $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
+                $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
+                redirect('login');
+            }
+        }
     }
 
     function index()
     {
-        if (!$this->session->userdata('logged_in')) {
-            $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
-            $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
-            redirect('login');
+        $session_data = $this->session->userdata('logged_in');
+        $lvl = $session_data['level'];
+        if ($lvl == "1") {
+            redirect('admin/Homepage');
         }
 
         if (isset($_POST['submit'])) {
@@ -31,6 +40,8 @@ class Homepage extends CI_Controller
         $sesi['nama'] = $session_data['nama'];
         $sesi['username'] = $session_data['username'];
         $sesi['email'] = $session_data['email'];
+
+        $data['uname'] = $sesi['username'];
 
         $config['base_url'] = 'http://localhost/magang-ci3/user/homepage/index';
         $this->db->like('nama', $data['keyword']);
