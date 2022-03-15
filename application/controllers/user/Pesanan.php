@@ -22,10 +22,12 @@ class Pesanan extends CI_Controller
             redirect('admin/Homepage');
         }
 
+        $username = $session_data['username'];
         $data['judul'] = "User Pesanan";
+        $data['pesanan'] = $this->Pesanan_model->getPesananUser($username);
         $this->load->view('templates/header', $data);
         $this->load->view('user/navbar');
-        $this->load->view('user/pesanan/index');
+        $this->load->view('user/pesanan/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -46,13 +48,9 @@ class Pesanan extends CI_Controller
         $data['judul'] = "Tambah Pesanan";
         $data['produk'] = $this->Pesanan_model->getAllProduk();
 
-        $session_data = $this->session->userdata('logged_in');
-        $data['id'] = $session_data['id'];
-        $data['username'] = $session_data['username'];
-        $id = $data['id'];
-        $username = $data['username'];
-        $count = $this->Pesanan_model->countDataUsername($username);
-        $count++;
+        $data['json'] = $this->Pesanan_model->getJson();
+
+        // echo json_encode(json_decode($json), JSON_PRETTY_PRINT);
 
         $this->form_validation->set_rules('tgl', 'Tanggal', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -72,7 +70,15 @@ class Pesanan extends CI_Controller
             $pdf = $pdf['file_name'];
 
             // mengambil count hasil username
-            // day month year (now) + no urut sekarang
+            $session_data = $this->session->userdata('logged_in');
+            $data['id'] = $session_data['id'];
+            $data['username'] = $session_data['username'];
+            $id = $data['id'];
+            $username = $data['username'];
+            $count = $this->Pesanan_model->countDataUsername($username);
+            $count++;
+
+            // id day month year (now) + no urut sekarang
             $id = date('dmy') . sprintf("%03s", $id) . sprintf("%03s", $count);
 
             $master = array(
@@ -84,33 +90,58 @@ class Pesanan extends CI_Controller
                 "unit" => $this->input->post('unit', true),
                 "nde" => $pdf
             );
+
+            $produk = $this->input->post('produk', true);
+            $banyak = $this->input->post('banyak', true);
+
+            $detil = array();
+
+            $index = 0;
+            foreach ($produk as $produkid) {
+                array_push($detil, array(
+                    'id' => $id,
+                    'produk_id' => $produkid,
+                    'banyak' => $banyak[$index],
+                ));
+
+                $index++;
+            }
+
             $this->Pesanan_model->addDataPesananMaster($master);
+            $this->Pesanan_model->addDataPesananDetil($detil);
+
             redirect('user/pesanan/index');
         }
     }
 
-    function printAll()
+    function printAll($id)
     {
         $data['judul'] = "Berita Serah Terima";
         $this->load->view('templates/header', $data);
-        $this->load->view('user/pesanan/printSerah');
-        $this->load->view('user/pesanan/printTerima');
-        $this->load->view('templates/footer', $data);
+        $data['master'] = $this->Pesanan_model->getMasterData($id);
+        $data['detail'] = $this->Pesanan_model->getDetailData($id);
+        $this->load->view('templates/printSerah', $data);
+        $this->load->view('templates/printTerima', $data);
+        $this->load->view('templates/footer');
     }
 
-    function printPenyerahan()
+    function printPenyerahan($id)
     {
         $data['judul'] = "Berita Serah Terima";
+        $data['master'] = $this->Pesanan_model->getMasterData($id);
+        $data['detail'] = $this->Pesanan_model->getDetailData($id);
         $this->load->view('templates/header', $data);
-        $this->load->view('user/pesanan/printSerah');
-        $this->load->view('templates/footer', $data);
+        $this->load->view('templates/printSerah', $data);
+        $this->load->view('templates/footer');
     }
 
-    function printPengembalian()
+    function printPengembalian($id)
     {
         $data['judul'] = "Berita Serah Terima";
+        $data['master'] = $this->Pesanan_model->getMasterData($id);
+        $data['detail'] = $this->Pesanan_model->getDetailData($id);
         $this->load->view('templates/header', $data);
-        $this->load->view('user/pesanan/printTerima');
-        $this->load->view('templates/footer', $data);
+        $this->load->view('templates/printTerima', $data);
+        $this->load->view('templates/footer');
     }
 }

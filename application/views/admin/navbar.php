@@ -1,9 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:#f1f4f5;">
+    <div class="container container-fluid">
         <a class="navbar-brand" href="<?php echo base_url() ?>admin/homepage">
             <img src="<?php echo base_url('assets/image/celoe.png') ?>" alt="" width="120" height="40">
         </a>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url() ?>admin/homepage">Homepage</a>

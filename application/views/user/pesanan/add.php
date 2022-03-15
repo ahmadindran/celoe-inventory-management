@@ -6,6 +6,8 @@
                     Tambah Pesanan
                 </div>
 
+                <!-- <?php echo json_encode(json_decode($json), JSON_PRETTY_PRINT); ?> -->
+
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
 
@@ -97,7 +99,8 @@
                             <label for="barang" class="col-sm-2 col-form-label">Barang</label>
                             <div class="form-group fieldGroup">
                                 <div class="input-group">
-                                    <select class="form-select" aria-label="Default select example">
+                                    <!-- <input type="hidden" name="produk[]" value="null"> -->
+                                    <select class="form-select" aria-label="Default select example" name="produk[]">
                                         <option selected disabled>Open this select menu</option>
                                         <?php foreach ($produk as $pdk) :
                                             if ($pdk['status'] == "1") { ?>
@@ -106,7 +109,7 @@
                                         endforeach; ?>
                                     </select>
                                     <!-- <p id="available_quantity<?php echo $x; ?>"></p> -->
-                                    <input type="number" name="banyak" id="banyak">
+                                    <input type="number" name="banyak[]" id="banyak">
                                     <div class="input-group-addon ml-3">
                                         <a href="javascript:void(0)" class="btn btn-warning addMore"><i class="bi bi-plus"></i></a>
                                     </div>
@@ -117,7 +120,7 @@
                         <div class="mb-3 row">
                             <div class="form-group fieldGroupCopy" style="display: none;">
                                 <div class="input-group">
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" aria-label="Default select example" name="produk[]">
                                         <option selected disabled>Open this select menu</option>
                                         <?php foreach ($produk as $pdk) :
                                             if ($pdk['status'] == "1") { ?>
@@ -125,8 +128,8 @@
                                         <?php  }
                                         endforeach; ?>
                                     </select>
-                                    <input type="number" disabled>
-                                    <input type="number" name="banyak" id="banyak">
+                                    <!-- <input type="number" disabled> -->
+                                    <input type="number" name="banyak[]" id="banyak">
                                     <div class="input-group-addon">
                                         <a href="javascript:void(0)" class="btn btn-danger remove"><i class="bi bi-trash"></i></a>
                                     </div>

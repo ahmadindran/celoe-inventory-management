@@ -8,6 +8,7 @@ class Homepage extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Homepage_model');
+        $this->load->model('Pesanan_model');
         $this->load->library('pagination');
         if (!$this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
@@ -41,7 +42,8 @@ class Homepage extends CI_Controller
         $sesi['username'] = $session_data['username'];
         $sesi['email'] = $session_data['email'];
 
-        $data['uname'] = $sesi['username'];
+        $username = $sesi['username'];
+        $data['jumlah'] = $this->Pesanan_model->countDataUsername($username);
 
         $config['base_url'] = 'http://localhost/magang-ci3/user/homepage/index';
         $this->db->like('nama', $data['keyword']);

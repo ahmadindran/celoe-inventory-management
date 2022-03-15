@@ -37,7 +37,7 @@
                     <tbody>
                         <tr>
                             <td style="width: 74px;vertical-align: top;color: red;" rowspan="3">Kepada, </td>
-                            <td style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: red">&nbsp;Ujang</td>
+                            <td style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: red">&nbsp;<?= $master['nama'] ?></td>
                         </tr>
                         <tr>
                             <td style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: black">&nbsp;</td>
@@ -50,8 +50,8 @@
                 <table align="left" cellspacing="0" style="width: 100%; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-right-width: thin; border-bottom-width: thin; border-left-width: thin; border-right-color: black; border-bottom-color: black; border-left-color: black;">
                     <tbody>
                         <tr>
-                            <td style=" border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: red;color: red;">NIP: 1234567890</td>
-                            <td style="border-left-style: solid; border-left-width: thin; border-left-color: black; border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: red;color: red;">Unit: FIT</td>
+                            <td style=" border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: red;color: red;">NIP: <?= $master['nip'] ?></td>
+                            <td style="border-left-style: solid; border-left-width: thin; border-left-color: black; border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: red;color: red;">Unit: <?= $master['unit'] ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -60,10 +60,10 @@
                 <table align="left" cellpadding="0" cellspacing="0" style="width: 100%">
                     <tbody>
                         <tr>
-                            <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;border-top: 1px solid black;border-right: 1px solid black;color: red;">Bill No : 123456789012345</td>
+                            <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;border-top: 1px solid black;border-right: 1px solid black;color: red;">Bill No : <?= $master['id'] ?></td>
                         </tr>
                         <tr>
-                            <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;border-right: 1px solid black;    color: red;">Tanggal: <?= date("d/m/Y") ?></td>
+                            <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;border-right: 1px solid black;    color: red;">Tanggal: <?= $master['tanggal'] ?></td>
                         </tr>
                         <tr>
                             <td style="border-bottom-style: solid;border-bottom-width: thin;border-bottom-color: black;height: 52px;border-right: 1px solid black;    color: red;">Ditujukan Kepada: Bang.CeLOE</td>
@@ -82,12 +82,18 @@
             <td style="width: 150px;text-align: center;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-top-width: thin;border-right-width: thin;border-bottom-width: thin;border-top-color: black;border-right-color: black;border-bottom-color: black;color: white;background-color: black;-webkit-print-color-adjust: exact;">Total<br> -->
             </td>
         </tr>
-        <tr>
-            <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px; text-align: center;">1</td>
-            <td style="border-left: 1px solid black;height: 27px;">SONY NSR NX-100</td>
-            <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px; text-align: center;">1</td>
-        </tr>
-        <tr>
+        <?php
+        $index = 1;
+        foreach ($detail as $dtl) : ?>
+            <tr>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px; text-align: center;"><?= $index; ?></td>
+                <td style="border-left: 1px solid black;height: 27px;"><?= $dtl['nama'] ?></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px; text-align: center;"><?= $dtl['banyak'] ?></td>
+            </tr>
+        <?php
+            $index++;
+        endforeach; ?>
+        <!-- <tr>
             <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px; text-align: center;">2</td>
             <td style="border-left: 1px solid black;height: 27px;">Tripod Kamera Broadcast</td>
             <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px; text-align: center;">1</td>
@@ -96,7 +102,7 @@
             <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px; text-align: center;">3</td>
             <td style="border-left: 1px solid black;height: 27px;">Boom Mic RODE</td>
             <td style="border-left: 1px solid black;border-right: 1px solid black; height: 27px; text-align: center;">1</td>
-        </tr>
+        </tr> -->
 
         <!-- <tr style="border-bottom: 1px solid black;">
             <td style="border-left: 1px solid black;border-right: 1px solid black;height: 27px;"></td>

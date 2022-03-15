@@ -11,40 +11,44 @@
             <?php endif; ?>
 
             <a type="button" href="<?php echo base_url() ?>user/pesanan/tambah" class="btn btn-primary">Tambah Pesanan</a>
-            <a type="button" href="<?php echo base_url() ?>user/pesanan/printAll" class="btn btn-primary"target="_blank">Print Semua Berita</a>
-            <a type="button" href="<?php echo base_url() ?>user/pesanan/printPenyerahan" class="btn btn-primary"target="_blank">Print Penyerahan</a>
-            <a type="button" href="<?php echo base_url() ?>user/pesanan/printPengembalian" class="btn btn-primary"target="_blank">Print Pengembalian</a>
             <div class="container">
 
                 <table class="table table-striped" id="managepesananTable">
                     <thead>
                         <tr class="table-dark">
-                            <th scope="col">pesanan</th>
-                            <th scope="col" colspan="2">Status</th>
+                            <th scope="col">Bill No.</th>
+                            <th scope="col" colspan="2">Tanggal Peminjaman</th>
                             </trb>
                     </thead>
                     <tbody>
-                        <!-- <?php foreach ($pesanan as $psn) : ?>
-                            <?php if ($psn['status'] == "1") { ?>
-                                <tr>
-                                    <td><?= $psn['pesanan'] ?></td>
-                                    <td><?php if ($psn['active'] == "1") {
-                                            echo 'Active';
-                                        } else {
-                                            echo 'Tidak active';
-                                        }  ?>
-                                    </td>
-                                    <td>
-                                        <a type="button" class="btn btn-warning float-right" href="<?= base_url(); ?>admin/pesanan/ubah/<?= $psn['id']; ?>">
-                                            Ubah
+                        <?php foreach ($pesanan as $psn) : ?>
+                            <tr>
+                                <td><?= $psn['id'] ?></td>
+                                <td><?= $psn['tanggal'] ?></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Surat Berita
                                         </a>
-                                        <a type="button" class="btn btn-danger float-right" href="<?= base_url(); ?>admin/pesanan/hapus/<?= $psn['id']; ?>" onclick="return confirm('Yakin?')">
-                                            <i class="bi bi-trash"></i>Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php }
-                                endforeach; ?> -->
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item" href="<?php echo base_url() ?>user/pesanan/printAll/<?= $psn['id']; ?>" target="_blank">
+                                                    Print Semua Berita
+                                                </a></li>
+                                            <li><a class="dropdown-item" href="<?= base_url(); ?>user/pesanan/printPenyerahan/<?= $psn['id']; ?>" target="_blank">
+                                                    Print Penyerahan
+                                                </a></li>
+                                            <li><a class="dropdown-item" href="<?php echo base_url() ?>user/pesanan/printPengembalian/<?= $psn['id']; ?>" target="_blank">
+                                                    Print Pengembalian
+                                                </a></li>
+                                        </ul>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
+
                     </tbody>
                 </table>
 
