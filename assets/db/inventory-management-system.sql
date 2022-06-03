@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2022 at 02:39 AM
+-- Generation Time: Jun 03, 2022 at 05:58 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -115,6 +115,14 @@ CREATE TABLE `order_detail` (
   `banyak` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `order_detail`
+--
+
+INSERT INTO `order_detail` (`id`, `produk_id`, `banyak`) VALUES
+('250522000001', '57IUQ', 1),
+('250522000001', 'ABC', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -128,8 +136,16 @@ CREATE TABLE `order_master` (
   `nama` varchar(100) NOT NULL,
   `nip` varchar(20) NOT NULL,
   `unit` varchar(20) NOT NULL,
-  `nde` varchar(255) NOT NULL
+  `nde` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_master`
+--
+
+INSERT INTO `order_master` (`id`, `username`, `tanggal`, `nama`, `nip`, `unit`, `nde`, `status`) VALUES
+('250522000001', 'user', '2022-05-28', 'Indra', '123465789', 'FIT', 'b84446cc9c2ca042542c0099f2c2fdf1.pdf', 3);
 
 -- --------------------------------------------------------
 
@@ -162,7 +178,7 @@ INSERT INTO `produk` (`id`, `nama`, `brand_id`, `kategori_id`, `stock`, `aktif`,
 ('MSHURE', 'Wireless Mic SHURE', 6, 6, 14, 1, 1, 'ac718af05a48ba99c845061fbb6f9ce7.jpg'),
 ('OUUUA', 'Stand Green Screen', 10, 4, 14, 1, 1, 'fd8f65765c360016d5a7c309a9d7a2ee.jpg'),
 ('QGUZR', 'BENRO Tripod Kamera', 3, 3, 7, 1, 1, 'e5de0af84d36fb7230f5e6550ee4ef5c.jpg'),
-('SBMRODE', 'Stand Boom Mic RODE', 5, 6, 14, 1, 1, 'f4fe5a1b91a794c3cec9fcd8498e983c.png'),
+('SBMRODE', 'Stand Boom Mic RODE', 5, 6, 14, 1, 1, 'f4fe5a1b91a794c3cec9fcd8498e983c.jpg'),
 ('SNA6000', 'SONY A6000', 1, 1, 2, 1, 1, 'c3ec64b557ed434610df06632a94e566.jpg'),
 ('TLPMT', 'Teleprompter TELIKOU ', 7, 11, 7, 1, 1, '62c41bafe34854f663459f41d3500feb.jpg'),
 ('VCCELGATO', 'ELGATO HD60S', 1, 8, 2, 1, 1, 'de53131d4e11d895c33b80b46691272a.jpg'),
@@ -176,7 +192,7 @@ INSERT INTO `produk` (`id`, `nama`, `brand_id`, `kategori_id`, `stock`, `aktif`,
 --
 
 CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
@@ -188,9 +204,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `nama`, `email`, `password`, `level`) VALUES
+INSERT INTO `user` (`id`, `username`, `nama`, `email`, `password`, `level`) VALUES
 (1, 'admin', 'Admin', 'admin@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 1),
-(2, 'user', 'user', 'user@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 2);
+(2, 'user', 'Dummy Acc', 'user1@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 2);
 
 --
 -- Indexes for dumped tables
@@ -239,7 +255,7 @@ ALTER TABLE `produk`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -262,12 +278,6 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `feedback`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
