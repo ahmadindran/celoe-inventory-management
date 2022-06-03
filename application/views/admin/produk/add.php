@@ -78,7 +78,7 @@
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-danger">Save</button>
-                            <button type="button" class="btn btn-light">Cancel</button>
+                            <button type="submit" class="btn btn-light" onclick="window.history.go(-1); return false;">Cancel</button>
                         </div>
                     </form>
                 </div>

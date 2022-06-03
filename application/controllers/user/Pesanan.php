@@ -7,6 +7,7 @@ class Pesanan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Pesanan_model');
+        $this->load->model('Feedback_model');
         if (!$this->session->userdata('logged_in')) {
             $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
             $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
@@ -25,6 +26,7 @@ class Pesanan extends CI_Controller
         $username = $session_data['username'];
         $data['judul'] = "User Pesanan";
         $data['pesanan'] = $this->Pesanan_model->getPesananUser($username);
+        $data['feedback'] = $this->Feedback_model->getLink();
         $this->load->view('templates/header', $data);
         $this->load->view('user/navbar');
         $this->load->view('user/pesanan/index', $data);

@@ -1,12 +1,10 @@
 <div class="container">
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center" style="margin-top: 20px;">
         <div class="col-9">
             <div class="card">
                 <div class="card-header">
-                    Tambah Pesanan
+                    <h3>Tambah Pesanan</h3>
                 </div>
-
-                <!-- <?php echo json_encode(json_decode($json), JSON_PRETTY_PRINT); ?> -->
 
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
@@ -51,107 +49,52 @@
                             </div>
                         </div>
 
-                        <!-- <table class="table">
-                            <thead>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>4</th>
-                            </thead>
-                            <tbody>
-                                <div class="form-group fieldGroup">
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-warning addMore"><i class="bi bi-plus"></i></a>
-                                        </td>
-                                    </tr>
-                                </div>
-                                <div class="form-group fieldGroupCopy" style="display: none;">
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-danger remove"><i class="bi bi-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                </div>
-
-                            </tbody>
-                        </table> -->
-
                         <div class="mb-3 row">
                             <label for="barang" class="col-sm-2 col-form-label">Barang</label>
-                            <div class="form-group fieldGroup">
-                                <div class="input-group">
-                                    <!-- <input type="hidden" name="produk[]" value="null"> -->
-                                    <select class="form-select" aria-label="Default select example" name="produk[]">
-                                        <option selected disabled>Open this select menu</option>
-                                        <?php foreach ($produk as $pdk) :
-                                            if ($pdk['status'] == "1") { ?>
-                                                <option value="<?= $pdk['id'] ?>"><?= $pdk['nama'] ?></option>
-                                        <?php  }
-                                        endforeach; ?>
-                                    </select>
-                                    <!-- <p id="available_quantity<?php echo $x; ?>"></p> -->
-                                    <input type="number" name="banyak[]" id="banyak">
-                                    <div class="input-group-addon ml-3">
-                                        <a href="javascript:void(0)" class="btn btn-warning addMore"><i class="bi bi-plus"></i></a>
+                            <div class="col-sm-10">
+                                <div class="form-group fieldGroup">
+                                    <div class="input-group" style="margin-bottom: 5px;">
+                                        <select class="form-select" aria-label="Default select example" name="produk[]" style="width: 50%">
+                                            <option selected disabled>Pilih Barang</option>
+                                            <?php foreach ($produk as $pdk) :
+                                                if ($pdk['status'] == "1") { ?>
+                                                    <option value="<?= $pdk['id'] ?>"><?= $pdk['nama'] ?></option>
+                                            <?php  }
+                                            endforeach; ?>
+                                        </select>
+                                        <input type="number" class="form-control" name="banyak[]" id="banyak">
+                                        <div class="input-group-addon ml-3">
+                                            <a href="javascript:void(0)" class="btn btn-warning addMore"><i class="fa-solid fa-plus"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mb-3 row">
-                            <div class="form-group fieldGroupCopy" style="display: none;">
-                                <div class="input-group">
-                                    <select class="form-select" aria-label="Default select example" name="produk[]">
-                                        <option selected disabled>Open this select menu</option>
-                                        <?php foreach ($produk as $pdk) :
-                                            if ($pdk['status'] == "1") { ?>
-                                                <option value="<?= $pdk['id'] ?>"><?= $pdk['nama'] ?></option>
-                                        <?php  }
-                                        endforeach; ?>
-                                    </select>
-                                    <!-- <input type="number" disabled> -->
-                                    <input type="number" name="banyak[]" id="banyak">
-                                    <div class="input-group-addon">
-                                        <a href="javascript:void(0)" class="btn btn-danger remove"><i class="bi bi-trash"></i></a>
+                            <div class="col-sm-10">
+                                <div class="form-group fieldGroupCopy" style="display: none;">
+                                    <div class="input-group" style="margin-bottom: 5px;">
+                                        <select class="form-select" aria-label="Default select example" name="produk[]" style="width: 50%">
+                                            <option selected disabled>Pilih Barang</option>
+                                            <?php foreach ($produk as $pdk) :
+                                                if ($pdk['status'] == "1") { ?>
+                                                    <option value="<?= $pdk['id'] ?>"><?= $pdk['nama'] ?></option>
+                                            <?php  }
+                                            endforeach; ?>
+                                        </select>
+                                        <input type="number" class="form-control" name="banyak[]" id="banyak">
+                                        <div class="input-group-addon">
+                                            <a href="javascript:void(0)" class="btn btn-danger remove"><i class="fa-solid fa-trash"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="mb-3 row">
-                            <div class="form-group fieldGroup">
-                                <div class="input-group">
-                                    <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                    <input type="text" name="email[]" class="form-control" placeholder="Enter Your email" />
-                                    <div class="input-group-addon ml-3">
-                                        <a href="javascript:void(0)" class="btn btn-warning addMore"><i class="bi bi-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-danger print" name="submit">Save</button>
-                            <button type="button" class="btn btn-light">Cancel</button>
+                            <button type="submit" class="btn btn-light" onclick="window.history.go(-1); return false;">Cancel</button>
                         </div>
 
                     </form>

@@ -50,51 +50,7 @@
                                 <div class="form-text text-danger"><?= form_error('nde'); ?></div>
                             </div>
                         </div>
-
-                        <!-- <table class="table">
-                            <thead>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>4</th>
-                            </thead>
-                            <tbody>
-                                <div class="form-group fieldGroup">
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-warning addMore"><i class="bi bi-plus"></i></a>
-                                        </td>
-                                    </tr>
-                                </div>
-                                <div class="form-group fieldGroupCopy" style="display: none;">
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="username[]" class="form-control" placeholder="Enter Your Username" />
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-danger remove"><i class="bi bi-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                </div>
-
-                            </tbody>
-                        </table> -->
-
+                        
                         <div class="mb-3 row">
                             <label for="barang" class="col-sm-2 col-form-label">Barang</label>
                             <div class="form-group fieldGroup">
@@ -150,7 +106,7 @@
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-danger print" name="submit">Save</button>
-                            <button type="button" class="btn btn-light">Cancel</button>
+                            <button type="submit" class="btn btn-light" onclick="window.history.go(-1); return false;">Cancel</button>
                         </div>
 
                     </form>

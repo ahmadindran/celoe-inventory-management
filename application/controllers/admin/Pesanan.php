@@ -32,6 +32,109 @@ class Pesanan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function ajax_list()
+    {
+        // $list = $this->Pesanan_model->get_datatables();
+        // $data = array();
+        // $no = $_POST['start'];
+        // foreach ($list as $pesanan) {
+        //     $no++;
+        //     $row = array();
+        //     $row[] = $no;
+        //     $row[] = $pesanan->id;
+        //     $row[] = $pesanan->tanggal;
+        //     $row[] = $pesanan->nama;
+        //     $row[] = $pesanan->nip;
+        //     $row[] = $pesanan->unit;
+        //     $row[] = $pesanan->nde;
+
+        //     $data[] = $row;
+        // }
+
+        // $output = array(
+        //     "draw" => $_POST['draw'],
+        //     "recordsTotal" => $this->pesanan->count_all(),
+        //     "recordsFiltered" => $this->pesanan->count_filtered(),
+        //     "data" => $data,
+        // );
+        // //output to json format
+        // echo json_encode($output);
+    }
+
+    function get_ajax()
+    {
+        $list = $this->Pesanan_model->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->id;
+            $row[] = $item->tanggal;
+            $row[] = $item->nama;
+            $row[] = $item->nip;
+            $row[] = $item->unit;
+            $row[] = $item->nde;
+            // $row[] = $no . ".";
+            // $row[] = $item->barcode . '<br><a href="' . site_url('item/barcode_qrcode/' . $item->item_id) . '" class="btn btn-default btn-xs">Generate <i class="fa fa-barcode"></i></a>';
+            // $row[] = $item->name;
+            // $row[] = $item->category_name;
+            // $row[] = $item->unit_name;
+            // $row[] = indo_currency($item->price);
+            // $row[] = $item->stock;
+            // $row[] = $item->image != null ? '<img src="' . base_url('uploads/product/' . $item->image) . '" class="img" style="width:100px">' : null;
+            // // add html for action
+            // $row[] = '<a href="' . site_url('item/edit/' . $item->item_id) . '" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+            //         <a href="' . site_url('item/del/' . $item->item_id) . '" onclick="return confirm(\'Yakin hapus data?\')"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->item_m->count_all(),
+            "recordsFiltered" => $this->item_m->count_filtered(),
+            "data" => $data,
+        );
+        // output to json format
+        echo json_encode($output);
+    }
+
+    public function ambildata()
+    {
+        // header('Content-Type: application/json');
+        if ($this->input->is_ajax_request() == TRUE) {
+            $this->load->model('Pesanan_model', 'pesanan');
+            $list = $this->pesanan->get_datatables();
+            $data = array();
+            $no = $_POST['start'];
+            foreach ($list as $field) {
+
+                $no++;
+                $row = array();
+                // array(null, 'id', 'tanggal', 'nama', 'nip', 'unit', 'nde')
+                $row[] = $no;
+                $row[] = $field->id;
+                $row[] = $field->tanggal;
+                $row[] = $field->nama;
+                $row[] = $field->nip;
+                $row[] = $field->unit;
+                $row[] = $field->nde;
+                $data[] = $row;
+            }
+
+            $output = array(
+                "draw" => $_POST['draw'],
+                "recordsTotal" => $this->pesanan->count_all(),
+                "recordsFiltered" => $this->pesanan->count_filtered(),
+                "data" => $data,
+            );
+            //output dalam format JSON
+            echo json_encode($output);
+        } else {
+            exit('Maaf data tidak bisa ditampilkan');
+        }
+    }
+
     function tambah()
     {
         $session_data = $this->session->userdata('logged_in');
@@ -118,6 +221,18 @@ class Pesanan extends CI_Controller
     function downloadNde($nde)
     {
         force_download('assets/upload/nde/' . $nde, NULL);
+    }
+
+    function updateStatus1($id)
+    {
+        $this->Pesanan_model->updateStatus1($id);
+        redirect('admin/pesanan/index');
+    }
+
+    function updateStatus2($id)
+    {
+        $this->Pesanan_model->updateStatus2($id);
+        redirect('admin/pesanan/index');
     }
 
     function printAll($id)

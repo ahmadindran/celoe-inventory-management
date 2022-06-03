@@ -25,6 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost/magang-ci3/';
 
+// $config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
+// $config['base_url'] .= preg_replace('@/+$@','',dirname($_SERVER['SCRIPT_NAME'])).'/';
+
 /*
 |--------------------------------------------------------------------------
 | Index File

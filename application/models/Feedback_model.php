@@ -42,4 +42,9 @@ class Feedback_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('feedback', $data);
     }
+
+    function getLink()
+    {
+        return $this->db->get_where('feedback', ['status' => '1'])->row_array();
+    }
 }

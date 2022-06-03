@@ -26,6 +26,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url() ?>admin/feedback">Feedback</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url() ?>admin/akun">Akun</a>
+                </li>
                 <a href="<?php echo base_url() ?>/login/logout_proses" class="btn btn-warning" role="button">Logout</a>
             </ul>
         </div>

@@ -14,7 +14,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url() ?>user/pesanan">Pemesanan</a>
                 </li>
-                <a href="<?php echo base_url() ?>/login/logout_proses" class="btn btn-warning" role="button">Logout</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url() ?>user/akun">Akun</a>
+                </li>
+                <a href="<?php echo base_url() ?>/login/logout_proses" class="btn btn-warning" role="button"><i class="fa-solid fa-power-off"></i></a>
             </ul>
         </div>
     </div>

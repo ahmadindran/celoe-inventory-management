@@ -74,7 +74,7 @@
                                             Ubah
                                         </a>
                                         <a type="button" class="btn btn-danger float-right" href="<?= base_url(); ?>admin/produk/hapus/<?= $pdk['id']; ?>" onclick="return confirm('Yakin?')">
-                                            <i class="bi bi-trash"></i>Hapus
+                                            <i class="fa-regular fa-trash-can"></i> Hapus
                                         </a>
                                     </div>
                                 </div>

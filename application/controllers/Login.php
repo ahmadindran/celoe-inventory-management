@@ -8,7 +8,7 @@ class Login extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Model_login');
+        $this->load->model('Login_model');
     }
 
     // fungsi utama pada class login
@@ -38,7 +38,7 @@ class Login extends CI_Controller
     function check_database($password)
     {
         $username = $this->input->post('username');
-        $result = $this->Model_login->user($username, $password);
+        $result = $this->Login_model->user($username, $password);
         if ($result) {
             $sess_array = array();
             foreach ($result as $row) {

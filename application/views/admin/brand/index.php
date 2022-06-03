@@ -18,7 +18,7 @@
                         <tr class="table-dark">
                             <th scope="col">Brand</th>
                             <th scope="col" colspan="2">Status</th>
-                            </trb>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($brand as $brnd) : ?>
@@ -36,7 +36,7 @@
                                             Ubah
                                         </a>
                                         <a type="button" class="btn btn-danger float-right" href="<?= base_url(); ?>admin/brand/hapus/<?= $brnd['id']; ?>" onclick="return confirm('Yakin?')">
-                                            <i class="bi bi-trash"></i>Hapus
+                                        <i class="fa-regular fa-trash-can"></i> Hapus
                                         </a>
                                     </td>
                                 </tr>
