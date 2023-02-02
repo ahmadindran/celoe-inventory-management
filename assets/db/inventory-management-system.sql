@@ -100,8 +100,8 @@ CREATE TABLE `feedback` (
 -- Dumping data for table `feedback`
 --
 
-INSERT INTO `feedback` (`id`, `deskripsi`, `link_admin`, `link_user`, `status`) VALUES
-(1, 'Test 123', 'https://www.google.co.id/', 'https://www.bing.co.id/', 1);
+-- INSERT INTO `feedback` (`id`, `deskripsi`, `link_admin`, `link_user`, `status`) VALUES
+-- (1, 'Test 123', 'https://www.google.co.id/', 'https://www.bing.co.id/', 1);
 
 -- --------------------------------------------------------
 
