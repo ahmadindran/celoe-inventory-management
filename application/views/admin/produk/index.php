@@ -1,6 +1,15 @@
-<div class="container">
-    <h3>Produk</h3>
-    <div class="row">
+<div class="container" style="margin-top: 20px;">
+    <div class="row justify-content-between">
+        <div class="col-2" style="margin-left: 3%;">
+            <h3>Produk</h3>
+        </div>
+
+        <div class="col-2">
+            <a type="button" href="<?php echo base_url() ?>admin/produk/tambah" class="btn btn-primary float-right">Tambah Produk</a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
         <div class="col-md-12">
 
             <?php if ($this->session->flashdata('produk')) : ?>
@@ -9,50 +18,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
-
-            <a type="button" href="<?php echo base_url() ?>admin/produk/tambah" class="btn btn-primary float-right">Tambah produk</a>
-
-            <!-- <div class="container">
-                <table class="table table-striped" id="manageprodukTable">
-                    <thead>
-                        <tr class="table-dark">
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Brand</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col" colspan="2">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($produk as $pdk) :
-                            if ($pdk['status'] == "1") { ?>
-                                <tr>
-                                    <td><?= $pdk['id'] ?></td>
-                                    <td><?= $pdk['nama'] ?></td>
-                                    <td><?= $pdk['brand'] ?></td>
-                                    <td><?= $pdk['kategori'] ?></td>
-                                    <td><?= $pdk['stock'] ?></td>
-                                    <td><?php if ($pdk['aktif'] == "1") {
-                                            echo 'Tersedia';
-                                        } else {
-                                            echo 'Tidak Tersedia';
-                                        }  ?>
-                                    </td>
-                                    <td>
-                                        <a type="button" class="btn btn-warning float-right" href="<?= base_url(); ?>admin/produk/ubah/<?= $pdk['id']; ?>">
-                                            Ubah
-                                        </a>
-                                        <a type="button" class="btn btn-danger float-right" href="<?= base_url(); ?>admin/produk/hapus/<?= $pdk['id']; ?>" onclick="return confirm('Yakin?')">
-                                            <i class="bi bi-trash"></i>Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                        <?php }
-                        endforeach; ?>
-                    </tbody>
-                </table>
-            </div> -->
 
             <div class="container">
                 <div class="row">
@@ -70,7 +35,7 @@
                                                                     echo 'Tidak Tersedia';
                                                                 }  ?></p>
                                         <p class="text-end">Stock <?= $pdk['stock'] ?></p>
-                                        <a type="button" class="btn btn-warning float-right" href="<?= base_url(); ?>admin/produk/ubah/<?= $pdk['id']; ?>">
+                                        <a type="button" class="btn btn-warning float-right ml-2" href="<?= base_url(); ?>admin/produk/ubah/<?= $pdk['id']; ?>">
                                             Ubah
                                         </a>
                                         <a type="button" class="btn btn-danger float-right" href="<?= base_url(); ?>admin/produk/hapus/<?= $pdk['id']; ?>" onclick="return confirm('Yakin?')">

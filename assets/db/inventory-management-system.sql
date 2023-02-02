@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2022 at 02:39 AM
+-- Generation Time: Feb 02, 2023 at 12:42 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -42,15 +42,15 @@ CREATE TABLE `brands` (
 INSERT INTO `brands` (`id`, `brand`, `active`, `status`) VALUES
 (1, 'SONY', 1, 1),
 (2, 'Yong Nuo', 1, 1),
-(3, 'BENRO', 1, 1),
+(3, 'BENRO', 1, 2),
 (4, 'EXCELL', 1, 1),
 (5, 'RODE', 1, 1),
 (6, 'SHURE', 1, 1),
 (7, 'TELIKOU', 1, 1),
 (8, 'TP-Link ', 1, 1),
 (9, 'EZCAP', 1, 1),
-(10, '-', 1, 1),
-(11, 'ELGATO', 1, 1);
+(10, '-', 1, 2),
+(11, 'ELGATO', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ INSERT INTO `categories` (`id`, `categories`, `active`, `status`) VALUES
 (6, 'Microphone', 1, 1),
 (7, 'Switch', 1, 1),
 (8, 'Video Capture Card', 1, 1),
-(9, 'Furniture', 1, 1),
+(9, 'Furniture', 1, 2),
 (10, 'Tas Mobile Studio', 1, 1),
 (11, 'Teleprompter', 1, 1);
 
@@ -115,6 +115,38 @@ CREATE TABLE `order_detail` (
   `banyak` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `order_detail`
+--
+
+-- INSERT INTO `order_detail` (`id`, `produk_id`, `banyak`) VALUES
+-- ('250522000001', 'ABCD', 1),
+-- ('250522000001', 'ABC', 2),
+-- ('080622000002', 'ABCD', 1),
+-- ('080622000002', '8M3D8', 2),
+-- ('080622000002', 'TLPMT', 3),
+-- ('240622000001', '8M3D8', 1),
+-- ('240622000001', 'DZADQ', 2),
+-- ('240622001002', 'DZADQ', 1),
+-- ('240622001002', 'DZADQ', 2),
+-- ('220624001003', 'ABC', 4),
+-- ('220624001003', 'GRNSC', 2),
+-- ('220802001004', 'DZADQ', 1),
+-- ('220802001004', 'QGUZR', 2),
+-- ('220802001004', 'VCCELGATO', 1),
+-- ('010223002001', '8M3D8', 1),
+-- ('010223002001', 'SNA6000', 1),
+-- ('010223002001', 'VCCEZCAP', 1),
+-- ('010223002002', 'DZADQ', 1),
+-- ('010223002002', 'GRNSC', 3),
+-- ('010223002002', 'QGUZR', 2),
+-- ('010223002003', 'MSHURE', 5),
+-- ('010223002003', 'GBTPLINK', 4),
+-- ('010223002003', 'OUUUA', 1),
+-- ('010223002004', 'DZADQ', 1),
+-- ('010223002004', 'ABCD', 2),
+-- ('010223002004', 'VCCELGATO', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -124,12 +156,24 @@ CREATE TABLE `order_detail` (
 CREATE TABLE `order_master` (
   `id` varchar(20) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tgl_peminjaman` varchar(10) NOT NULL,
+  `tgl_pengembalian` varchar(10) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `nip` varchar(20) NOT NULL,
   `unit` varchar(20) NOT NULL,
-  `nde` varchar(255) NOT NULL
+  `nde` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_master`
+--
+
+-- INSERT INTO `order_master` (`id`, `username`, `tgl_peminjaman`, `tgl_pengembalian`, `nama`, `nip`, `unit`, `nde`, `status`) VALUES
+-- ('010223002001', 'user', '06-02-2023', '11-02-2023', 'Adi', '1234567890', 'LAK', '4980d13b77e63cbe68e34429eb3872c9.pdf', 1),
+-- ('010223002002', 'user', '07-02-2023', '11-02-2023', 'Budi', '23456789', 'FIK', 'fd47f315c0ef0a7b76d0403f5ae1864c.pdf', 1),
+-- ('010223002003', 'user', '13-02-2023', '17-02-2023', 'Cici', '987645612', 'FEB', '27e1515c0541da0100e60f73b5284334.pdf', 1),
+-- ('010223002004', 'user', '01-05-2023', '06-05-2023', 'Dedi', '895465123', 'FIT', 'aa44486461e6aa77655bf24ab90f928d.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -153,16 +197,17 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `nama`, `brand_id`, `kategori_id`, `stock`, `aktif`, `status`, `foto`) VALUES
-('57IUQ', 'Boom Mic RODE', 5, 6, 5, 1, 1, '0b95dd08d5f8cc043bab4cada7632c02.jpg'),
 ('8M3D8', 'YN-300 + Charger', 2, 2, 28, 2, 1, '35e325f478fba8e3563c6c739da705e4.jpg'),
 ('ABC', 'SONY NSR NX-100', 1, 1, 14, 1, 1, 'b5b2e9a4b3d236c3121d0eec02386087.jpg'),
+('ABCD', 'Boom Mic RODE', 5, 6, 6, 1, 1, '0b7409158980d139ba9d875566b22cd9.jpg'),
+('BO1', 'Test', 1, 1, 2, 1, 2, '744f4a2d5f6f397e79bef2ba2ea4eda2.jpg'),
 ('DZADQ', 'YN-600 + Charger', 1, 1, 6, 1, 1, '3ec1a088a2aa35764304c78c02dd1782.jpg'),
 ('GBTPLINK', 'Gigabit TP-Link', 8, 7, 1, 1, 1, '4e368d93ab7310d11e9bb6b60acec5f2.jpg'),
 ('GRNSC', 'Green Screen', 10, 4, 14, 1, 1, 'df9c9cbb21a7e526f81059938daeb856.jpg'),
 ('MSHURE', 'Wireless Mic SHURE', 6, 6, 14, 1, 1, 'ac718af05a48ba99c845061fbb6f9ce7.jpg'),
 ('OUUUA', 'Stand Green Screen', 10, 4, 14, 1, 1, 'fd8f65765c360016d5a7c309a9d7a2ee.jpg'),
 ('QGUZR', 'BENRO Tripod Kamera', 3, 3, 7, 1, 1, 'e5de0af84d36fb7230f5e6550ee4ef5c.jpg'),
-('SBMRODE', 'Stand Boom Mic RODE', 5, 6, 14, 1, 1, 'f4fe5a1b91a794c3cec9fcd8498e983c.png'),
+('SBMRODE', 'Stand Boom Mic RODE', 5, 6, 14, 1, 1, 'f4fe5a1b91a794c3cec9fcd8498e983c.jpg'),
 ('SNA6000', 'SONY A6000', 1, 1, 2, 1, 1, 'c3ec64b557ed434610df06632a94e566.jpg'),
 ('TLPMT', 'Teleprompter TELIKOU ', 7, 11, 7, 1, 1, '62c41bafe34854f663459f41d3500feb.jpg'),
 ('VCCELGATO', 'ELGATO HD60S', 1, 8, 2, 1, 1, 'de53131d4e11d895c33b80b46691272a.jpg'),
@@ -176,7 +221,7 @@ INSERT INTO `produk` (`id`, `nama`, `brand_id`, `kategori_id`, `stock`, `aktif`,
 --
 
 CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
@@ -188,9 +233,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `nama`, `email`, `password`, `level`) VALUES
-(1, 'admin', 'Admin', 'admin@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 1),
-(2, 'user', 'user', 'user@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 2);
+INSERT INTO `user` (`id`, `username`, `nama`, `email`, `password`, `level`) VALUES
+(1, 'admin', 'Admin', 'admin@gmail.com', '25d55ad283aa400af464c76d713c07ad', 3),
+(2, 'user', 'Dummy Acc', 'user1@gmail.com', '25d55ad283aa400af464c76d713c07ad', 2),
+(3, 'dummy', 'dummy admin', 'admin@dummy.com', '25d55ad283aa400af464c76d713c07ad', 1);
 
 --
 -- Indexes for dumped tables
@@ -239,7 +285,7 @@ ALTER TABLE `produk`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -267,7 +313,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -277,14 +323,14 @@ ALTER TABLE `user`
 -- Constraints for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  ADD CONSTRAINT `fk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`);
+  ADD CONSTRAINT `fk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `produk`
 --
 ALTER TABLE `produk`
-  ADD CONSTRAINT `fk_brand` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_kategori` FOREIGN KEY (`kategori_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_brand` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_kategori` FOREIGN KEY (`kategori_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

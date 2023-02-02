@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Tambah Akun
+                    <?php echo $judul; ?>
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
@@ -31,10 +31,28 @@
                         </div>
                         <div class="mb-3 row">
                             <label for="brand" class="col-sm-2 col-form-label">Status</label>
+                            <!-- level user
+                            0 = belum approved
+                            1 = admin
+                            2 = user
+                            3 = super admin -->
                             <div class="col-sm-10">
                                 <select class="form-select" id="level" name="level" aria-label="Default select example">
-                                    <option value="2">User</option>
-                                    <option value="1">Admin</option>
+                                    <option value="0" <?php if ($akun['level'] == '0') {
+                                                            echo 'selected';
+                                                        }?>>Belum Approved</option>
+                                    <option value="1" <?php if ($akun['level'] == '1') {
+                                                            echo 'selected';
+                                                        } ?>>Admin</option>
+                                    <option value="2" <?php if ($akun['level'] == '2') {
+                                                            echo 'selected';
+                                                        } ?>>User</option>
+                                    <option value="3" <?php if ($akun['level'] == '3') {
+                                                            echo 'selected ';
+                                                        }
+                                                        if ($level == 1) {
+                                                            echo 'disabled';
+                                                        } ?>>Super Admin</option>
                                 </select>
                             </div>
                         </div>
@@ -50,6 +68,7 @@
                                 <div class="col-sm-10">
                                     <input class="form-control" id="password" name="password" type="password" placeholder="Password">
                                     <div class="form-text text-danger"><?= form_error('password'); ?></div>
+                                    <div class="small text-muted mt-2">&#9432; Minimal 8 Karakter</div>
                                 </div>
                             </div>
                             <div class="mb-3 row">

@@ -3,7 +3,7 @@
         <div class="col-9">
             <div class="card">
                 <div class="card-header">
-                    Tambah Produk
+                    <?php echo $judul; ?>
                 </div>
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
@@ -28,6 +28,7 @@
                             <label for="produk" class="col-sm-2 col-form-label">Brand</label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="brand" id="brand">
+                                    <option selected disabled>Pilih Produk</option>
                                     <?php foreach ($brand as $brnd) : ?>
                                         <?php if ($brnd['status'] == "1") { ?>
                                             <option value="<?= $brnd['id'] ?>"><?= $brnd['brand'] ?></option>
@@ -41,6 +42,7 @@
                             <label for="produk" class="col-sm-2 col-form-label">Kategori</label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="kategori" id="kategori">
+                                    <option selected disabled>Pilih Kategori</option>
                                     <?php foreach ($kategori as $ctg) : ?>
                                         <?php if ($ctg['status'] == "1") { ?>
                                             <option value="<?= $ctg['id'] ?>"><?= $ctg['categories'] ?></option>

@@ -6,6 +6,260 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(45deg, rgb(230, 230, 230), white);
+}
+
+.auth-card {
+    background-color: white;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 0.2);
+    border-radius: 20px;
+    padding: 10px 10%;
+}
+
+.logo-area {
+    padding: 20px 30%;
+    margin-top: 60px;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+}
+
+.auth-title {
+    text-align: center;
+    color: rgb(46, 46, 46);
+}
+
+.service-btn {
+    background-color: white;
+    border: 1px solid rgb(220, 220, 220);
+    width: 100%;
+    color: rgb(46, 46, 46);
+    height: 45px;
+    box-shadow: none !important;
+}
+
+.service-btn:hover {
+    color: #1da19b;
+    border: 1px solid #1da19b;
+}
+
+.service-icon {
+    margin-right: 10px;
+}
+
+.separator {
+    width: 100%;
+    color: rgb(46, 46, 46);
+}
+
+.auth-input {
+    background: white;
+    height: 45px;
+    border: 1px solid rgb(220, 220, 220);
+    color: rgb(46, 46, 46);
+    box-shadow: none !important;
+}
+
+.auth-input:focus {
+    color: #1da19b;
+    border: 1px solid #1da19b;
+}
+
+.input-info-text {
+    color: rgb(138, 138, 138);
+}
+
+.auth-btn {
+    background: #45a29e;
+    color: white;
+    height: 45px;
+    width: 100%;
+    font-size: 18px;
+    box-shadow: none !important;
+}
+
+.auth-btn:hover {
+    background: #24726e;
+    color: white;
+}
+
+.text {
+    text-align: center;
+    color: rgb(46, 46, 46);
+}
+
+.text-link {
+    color: #45a29e;
+}
+
+.text-link:hover {
+    color: #24726e;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.form-bg {
+    background: #00b4ef;
+}
+
+.form-horizontal {
+    background: #fff;
+    padding-bottom: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.form-horizontal .heading {
+    display: block;
+    font-size: 35px;
+    font-weight: 700;
+    padding: 35px 0;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 30px;
+}
+
+.form-horizontal .form-group {
+    padding: 0 40px;
+    margin: 0 0 25px 0;
+    position: relative;
+}
+
+.form-horizontal .form-control {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 20px;
+    box-shadow: none;
+    padding: 0 20px 0 45px;
+    height: 40px;
+    transition: all 0.3s ease 0s;
+}
+
+.form-horizontal .form-control:focus {
+    background: #e0e0e0;
+    box-shadow: none;
+    outline: 0 none;
+}
+
+.form-horizontal .form-group i {
+    position: absolute;
+    top: 12px;
+    left: 60px;
+    font-size: 17px;
+    color: #c8c8c8;
+    transition: all 0.5s ease 0s;
+}
+
+.form-horizontal .form-control:focus+i {
+    color: #00b4ef;
+}
+
+.form-horizontal .fa-question-circle {
+    display: inline-block;
+    position: absolute;
+    top: 12px;
+    right: 60px;
+    font-size: 20px;
+    color: #808080;
+    transition: all 0.5s ease 0s;
+}
+
+.form-horizontal .fa-question-circle:hover {
+    color: #000;
+}
+
+.form-horizontal .main-checkbox {
+    float: left;
+    width: 20px;
+    height: 20px;
+    background: #11a3fc;
+    border-radius: 50%;
+    position: relative;
+    margin: 5px 0 0 5px;
+    border: 1px solid #11a3fc;
+}
+
+.form-horizontal .main-checkbox label {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.form-horizontal .main-checkbox label:after {
+    content: "";
+    width: 10px;
+    height: 5px;
+    position: absolute;
+    top: 5px;
+    left: 4px;
+    border: 3px solid #fff;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+    opacity: 0;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.form-horizontal .main-checkbox input[type=checkbox] {
+    visibility: hidden;
+}
+
+.form-horizontal .main-checkbox input[type=checkbox]:checked+label:after {
+    opacity: 1;
+}
+
+.form-horizontal .text {
+    float: left;
+    margin-left: 7px;
+    line-height: 20px;
+    padding-top: 5px;
+    text-transform: capitalize;
+}
+
+.form-horizontal .btn {
+    float: right;
+    font-size: 14px;
+    color: #fff;
+    background: #00b4ef;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+    transition: all 0.5s ease 0s;
+}
+
+@media only screen and (max-width: 479px) {
+    .form-horizontal .form-group {
+        padding: 0 25px;
+    }
+
+    .form-horizontal .form-group i {
+        left: 45px;
+    }
+
+    .form-horizontal .btn {
+        padding: 10px 20px;
+    }
+}
+
 .alert {
     margin: 50px;
 }
@@ -80,4 +334,37 @@ p a:hover {
 
 hr {
     border-color: #20232E;
+}
+
+.bc {
+    background-image: href("assets\image\Background-02.png");
+}
+
+.login {
+    min-height: 100vh;
+}
+
+.bg-image {
+    background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-heading {
+    font-weight: 300;
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}
+
+@media print {
+
+    html,
+    body {
+        width: 210mm;
+        height: 297mm;
+    }
 }

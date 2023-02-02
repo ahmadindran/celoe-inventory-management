@@ -1,7 +1,4 @@
 <style>
-    body {
-        background-color: #f9f9fa
-    }
 
     .padding {
         padding: 3rem !important
@@ -135,7 +132,7 @@
 </style>
 
 <div class="container">
-    <h3>Pesanan</h3>
+    <h3>Akun</h3>
     <div class="row container">
         <div class="container">
             <div class="col-xl-6 col-md-12">
@@ -160,10 +157,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a type="button" class="btn btn-primary" href="<?php echo base_url() ?>user/akun/gantiProfile">Ganti Profile</a>
+                                        <a type="button" class="btn btn-primary" href="<?php echo base_url() ?>akun/gantiProfile">Ganti Profile</a>
                                     </div>
                                     <div class="col-sm-6">
-                                        <a type="button" class="btn btn-primary" href="<?php echo base_url() ?>user/akun/gantiPassword">Ganti Password</a>
+                                        <a type="button" class="btn btn-primary" href="<?php echo base_url() ?>akun/gantiPassword">Ganti Password</a>
                                     </div>
                                 </div>
                             </div>

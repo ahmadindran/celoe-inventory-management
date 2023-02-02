@@ -1,6 +1,15 @@
-<div class="container">
-    <h3>Kategori</h3>
-    <div class="row">
+<div class="container" style="margin-top: 20px;">
+    <div class="row justify-content-between">
+        <div class="col-2" style="margin-left: 3%;">
+            <h3>Kategori</h3>
+        </div>
+
+        <div class="col-2">
+            <a type="button" href="<?php echo base_url() ?>admin/kategori/tambah" class="btn btn-primary">Tambah Kategori</a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
         <div class="col-md-12">
 
             <?php if ($this->session->flashdata('kategori')) : ?>
@@ -10,10 +19,9 @@
                 </div>
             <?php endif; ?>
 
-            <a type="button" href="<?php echo base_url() ?>admin/kategori/tambah" class="btn btn-primary">Tambah kategori</a>
             <div class="container">
 
-                <table class="table table-striped" id="managekategoriTable">
+                <!-- <table class="table table-striped" id="managekategoriTable">
                     <thead>
                         <tr class="table-dark">
                             <th scope="col">Kategori</th>
@@ -32,7 +40,7 @@
                                         }  ?>
                                     </td>
                                     <td>
-                                        <a type="button" class="btn btn-warning float-right" href="<?= base_url(); ?>admin/kategori/ubah/<?= $ctg['id']; ?>">
+                                        <a type="button" class="btn btn-warning float-right ml-2" href="<?= base_url(); ?>admin/kategori/ubah/<?= $ctg['id']; ?>">
                                             Ubah
                                         </a>
                                         <a type="button" class="btn btn-danger float-right" href="<?= base_url(); ?>admin/kategori/hapus/<?= $ctg['id']; ?>" onclick="return confirm('Yakin?')">
@@ -43,9 +51,59 @@
                         <?php }
                         endforeach; ?>
                     </tbody>
+                </table> -->
+
+                <table id="table" class="table table-striped table-hover" id="manageBrandTable" width="100%">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Kategori</th>
+                            <th>Status</th>
+                            <th width="20%">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Kategori</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </tfoot>
                 </table>
 
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var table;
+
+    $(document).ready(function() {
+
+        //datatables
+        table = $('#table').DataTable({
+
+            "processing": true, //Feature control the processing indicator.
+            "serverSide": true, //Feature control DataTables' server-side processing mode.
+            "order": [], //Initial no order.
+
+            // Load data for the table's content from an Ajax source
+            "ajax": {
+                "url": "<?php echo site_url('admin/kategori/ajax_list') ?>",
+                "type": "POST"
+            },
+
+            //Set column definition initialisation properties.
+            "columnDefs": [{
+                "targets": [0], //first column / numbering column
+                "orderable": false, //set not orderable
+            }, ],
+
+        });
+
+    });
+</script>

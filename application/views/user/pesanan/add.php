@@ -6,14 +6,20 @@
                     <h3>Tambah Pesanan</h3>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" style="margin-top: 10px;">
                     <form action="" method="post" enctype="multipart/form-data">
 
-                        <div class="mb-3 row">
-                            <label for="deskripsi" class="col-sm-2 col-form-label">Tanggal Pemesanan</label>
+                        <div class="mb-3 row" style="padding-bottom: 4px;">
+                            <label for="deskripsi" class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="tgl" name="tgl" type="date" placeholder="Tanggal">
-                                <div class="form-text text-danger"><?= form_error('tgl'); ?></div>
+                                <div class="row g-3">
+                                    <div class="col">
+                                        <input class="form-control" id="dpd1" name="tgl-awal" type="text" placeholder="Dari" data-date-format="dd-mm-yyyy">
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" id="dpd2" name="tgl-akhir" type="text" placeholder="Sampai" data-date-format="dd-mm-yyyy">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -84,7 +90,7 @@
                                             endforeach; ?>
                                         </select>
                                         <input type="number" class="form-control" name="banyak[]" id="banyak">
-                                        <div class="input-group-addon">
+                                        <div class="input-group-addon ml-3">
                                             <a href="javascript:void(0)" class="btn btn-danger remove"><i class="fa-solid fa-trash"></i></a>
                                         </div>
                                     </div>
@@ -124,5 +130,30 @@
         $("body").on("click", ".remove", function() {
             $(this).parents(".fieldGroup").remove();
         });
+
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#dpd1').datepicker({
+            onRender: function(date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function(ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+            }
+            checkin.hide();
+            $('#dpd2')[0].focus();
+        }).data('datepicker');
+
+        var checkout = $('#dpd2').datepicker({
+            onRender: function(date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function(ev) {
+            checkout.hide();
+        }).data('datepicker');
     });
 </script>

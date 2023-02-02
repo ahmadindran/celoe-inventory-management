@@ -3,12 +3,15 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Tambah Produk
+                    <?php echo $judul; ?>
                 </div>
+
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" name="id-old" id="id-old" value="<?= $produk['id']; ?>">
+                        <input type="hidden" name="file-old" id="id-old" value="<?= $produk['foto']; ?>">
+
                         <div class="mb-3 row">
                             <label for="produk" class="col-sm-2 col-form-label">ID</label>
                             <div class="col-sm-10">
@@ -32,8 +35,8 @@
                                     <?php foreach ($brand as $brnd) : ?>
                                         <?php if ($brnd['status'] == "1") { ?>
                                             <option value="<?= $brnd['id'] ?>" <?php if ($produk['brand_id'] == $brnd['id']) {
-                                                                                        echo 'selected="selected"';
-                                                                                    } ?>><?= $brnd['brand'] ?></option>
+                                                                                    echo 'selected="selected"';
+                                                                                } ?>><?= $brnd['brand'] ?></option>
                                     <?php  }
                                     endforeach; ?>
                                 </select>
@@ -49,8 +52,8 @@
                                     <?php foreach ($kategori as $ctg) : ?>
                                         <?php if ($ctg['status'] == "1") { ?>
                                             <option value="<?= $ctg['id'] ?>" <?php if ($produk['kategori_id'] == $ctg['id']) {
-                                                                                            echo 'selected="selected"';
-                                                                                        } ?>><?= $ctg['categories'] ?></option>
+                                                                                    echo 'selected="selected"';
+                                                                                } ?>><?= $ctg['categories'] ?></option>
                                     <?php  }
                                     endforeach; ?>
                                 </select>
@@ -79,7 +82,6 @@
                                 </select>
                             </div>
                         </div>
-
 
                         <div class="mb-3 row">
                             <img src="<?php echo base_url() ?>assets/upload/produk/<?= $produk['foto'] ?>" alt="..." class="img-thumbnail">

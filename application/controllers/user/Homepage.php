@@ -11,15 +11,12 @@ class Homepage extends CI_Controller
         $this->load->model('Pesanan_model');
         $this->load->library('pagination');
         if (!$this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $level = $session_data['level'];
-            if ($level == '1') {
-                $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
-                $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
-                redirect('login');
-            }
+            $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
+            $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
+            redirect('login');
         }
     }
+
 
     function index()
     {
@@ -36,7 +33,9 @@ class Homepage extends CI_Controller
             $data['keyword'] = $this->session->userdata('keyword');
         }
 
-        $data['judul'] = "Homepage User";
+        $data['judul'] = "Homepage";
+        $data['nav_hp'] = 1;
+
         $session_data = $this->session->userdata('logged_in');
         $sesi['nama'] = $session_data['nama'];
         $sesi['username'] = $session_data['username'];
@@ -85,8 +84,16 @@ class Homepage extends CI_Controller
         $data['produk'] = $this->Homepage_model->getProduk($config['per_page'], $data['start'], $data['keyword']);
 
         $this->load->view('templates/header', $data);
-        $this->load->view('user/navbar');
+        $this->load->view('user/navbar', $data);
         $this->load->view('user/index', $sesi);
+        $this->load->view('templates/footer');
+    }
+
+    function error()
+    {
+        $data['judul'] = "Belum Terverifikasi";
+        $this->load->view('templates/header', $data);
+        $this->load->view('user/error');
         $this->load->view('templates/footer');
     }
 }

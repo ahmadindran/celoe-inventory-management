@@ -24,9 +24,11 @@ class Akun extends CI_Controller
         $username = $session_data['username'];
 
         $data['judul'] = "Akun";
+        $data['nav_akun'] = 1;
+
         $data['akun'] = $this->Akun_model->getAkunByUname($username);
         $this->load->view('templates/header', $data);
-        $this->load->view('user/navbar');
+        $this->load->view('user/navbar', $data);
         $this->load->view('user/akun/index', $data);
         $this->load->view('templates/footer');
     }
@@ -41,6 +43,8 @@ class Akun extends CI_Controller
         $username = $session_data['username'];
 
         $data['judul'] = "Edit Akun";
+        $data['nav_akun'] = 1;
+
         $data['akun'] = $this->Akun_model->getAkunByUname($username);
         $akun = $data['akun'];
 
@@ -64,11 +68,16 @@ class Akun extends CI_Controller
         $this->form_validation->set_message('email', 'This Email already exists.');
         if ($this->form_validation->run() == FALSE || md5($this->input->post('password')) != $akun['password']) {
             $this->load->view('templates/header', $data);
-            $this->load->view('user/navbar');
+            $this->load->view('user/navbar', $data);
             $this->load->view('user/akun/change_profile', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Akun_model->updateAkun();
+            $input = [
+                "nama" => $this->input->post('nama', true),
+                "username" => $this->input->post('username', true),
+                "email" => $this->input->post('email', true)
+            ];
+            $this->Akun_model->updateAkun($input);
             $this->session->set_flashdata('username', 'Diubah');
             redirect('user/akun/index');
         }
@@ -83,7 +92,9 @@ class Akun extends CI_Controller
         }
         $username = $session_data['username'];
 
-        $data['judul'] = "Edit Akun";
+        $data['judul'] = "Ganti Password";
+        $data['nav_akun'] = 1;
+
         $data['akun'] = $this->Akun_model->getAkunByUname($username);
         $akun = $data['akun'];
 
@@ -93,13 +104,18 @@ class Akun extends CI_Controller
 
         if ($this->form_validation->run() == FALSE || md5($this->input->post('password')) != $akun['password']) {
             $this->load->view('templates/header', $data);
-            $this->load->view('user/navbar');
+            $this->load->view('user/navbar', $data);
             $this->load->view('user/akun/change_password', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Akun_model->updatePass();
+            $input = [
+                "password" => MD5($this->input->post('passwordNew', true))
+            ];
+            $this->Akun_model->updatePass($input);
             $this->session->set_flashdata('username', 'Password Diubah');
             redirect('user/akun/index');
         }
     }
+
+    
 }

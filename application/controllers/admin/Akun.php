@@ -19,7 +19,7 @@ class Akun extends CI_Controller
         $session_data = $this->session->userdata('logged_in');
         $lvl = $session_data['level'];
         if ($lvl == "2") {
-            redirect('user/Homepage');
+            redirect('homepage');
         }
         $data['judul'] = "Admin Akun";
         $data['akun'] = $this->Akun_model->getAllAkun();
@@ -53,7 +53,14 @@ class Akun extends CI_Controller
             $this->load->view('admin/akun/add');
             $this->load->view('templates/footer');
         } else {
-            $this->Akun_model->addDataAkun();
+            $input = [
+                "nama" => $this->input->post('nama', true),
+                "username" => $this->input->post('username', true),
+                "email" => $this->input->post('email', true),
+                "password" => MD5($this->input->post('password', true)),
+                "level" => $this->input->post('level', true)
+            ];
+            $this->Akun_model->addDataAkun($input);
             $this->session->set_flashdata('username', 'Ditambahkan');
             redirect('admin/akun/index');
         }
@@ -68,6 +75,7 @@ class Akun extends CI_Controller
         }
 
         $data['judul'] = "Edit Akun";
+        $data['level'] = $lvl;
         $data['akun'] = $this->Akun_model->getAkunByUname($username);
         $akun = $data['akun'];
 
@@ -88,7 +96,7 @@ class Akun extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|min_length[8]');
         $this->form_validation->set_rules('passwordConf', 'Password', 'trim|matches[password]');
 
-        $this->form_validation->set_message('Username', 'This Username already exists.');
+        $this->form_validation->set_message('username', 'This Username already exists.');
         $this->form_validation->set_message('email', 'This Email already exists.');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -96,7 +104,23 @@ class Akun extends CI_Controller
             $this->load->view('admin/akun/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Akun_model->editDataAkun();
+            if ($this->input->post('password') != $akun['password']) {
+                $input = [
+                    "nama" => $this->input->post('nama', true),
+                    "username" => $this->input->post('username', true),
+                    "email" => $this->input->post('email', true),
+                    "password" => MD5($this->input->post('password', true)),
+                    "level" => $this->input->post('level', true)
+                ];
+            } else {
+                $input = [
+                    "nama" => $this->input->post('nama', true),
+                    "username" => $this->input->post('username', true),
+                    "email" => $this->input->post('email', true),
+                    "level" => $this->input->post('level', true)
+                ];
+            }
+            $this->Akun_model->editDataAkun($input);
             $this->session->set_flashdata('username', 'Diubah');
             redirect('admin/akun/index');
         }
@@ -105,7 +129,50 @@ class Akun extends CI_Controller
     function hapus($username)
     {
         $this->Akun_model->deleteDataAkun($username);
-        $this->session->set_flashdata('brand', 'Dihapus');
+        $this->session->set_flashdata('Akun', 'Dihapus');
         redirect('admin/akun/index');
+    }
+
+    public function ajax_list()
+    {
+        $list = $this->Akun_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $status = null;
+        foreach ($list as $item) {
+            $no++;
+            if ($item->level == "1") {
+                $status = 'Admin';
+            } elseif ($item->level == "2") {
+                $status = 'User';
+            } elseif ($item->level == "3") {
+                $status = 'Super Admin';
+            } elseif ($item->level == "0") {
+                $status = 'Belum Approve';
+            }
+            $row = array();
+            $row[] = $no;
+            $row[] = $item->nama;
+            $row[] = $item->username;
+            $row[] = $item->email;
+            $row[] = $status;
+            $row[] = '<div class="row justify-content-center">
+            <div class="col-4"><a type="button" class="btn btn-warning  btn-xs" href="' . site_url('admin/akun/ubah/' . $item->username) . '">
+                        Ubah
+                    </a></div>' .
+                '<div class="col-4"><a type="button" class="btn btn-danger btn-xs" href="' . site_url('admin/akun/hapus/'  . $item->username) . '" onclick="return confirm(' . 'Yakin?' . ')">
+                                            <i class="fa-regular fa-trash-can"></i> Hapus </a></div>
+                                            ';
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Akun_model->count_all(),
+            "recordsFiltered" => $this->Akun_model->count_filtered(),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
     }
 }

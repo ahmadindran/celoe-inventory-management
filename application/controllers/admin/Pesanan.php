@@ -8,6 +8,7 @@ class Pesanan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Pesanan_model');
+        $this->load->model('PesananA_model');
         $this->load->helper('download');
         if (!$this->session->userdata('logged_in')) {
             $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
@@ -21,118 +22,87 @@ class Pesanan extends CI_Controller
         $session_data = $this->session->userdata('logged_in');
         $lvl = $session_data['level'];
         if ($lvl == "2") {
-            redirect('user/Homepage');
+            redirect('homepage');
         }
 
         $data['judul'] = "Admin Pesanan";
+        $data['nav_pesanan'] = 1;
         $data['pesanan'] = $this->Pesanan_model->getAllPesanan();
+
         $this->load->view('templates/header', $data);
-        $this->load->view('admin/navbar');
+        $this->load->view('admin/navbar', $data);
         $this->load->view('admin/pesanan/index', $data);
         $this->load->view('templates/footer');
     }
 
     public function ajax_list()
     {
-        // $list = $this->Pesanan_model->get_datatables();
-        // $data = array();
-        // $no = $_POST['start'];
-        // foreach ($list as $pesanan) {
-        //     $no++;
-        //     $row = array();
-        //     $row[] = $no;
-        //     $row[] = $pesanan->id;
-        //     $row[] = $pesanan->tanggal;
-        //     $row[] = $pesanan->nama;
-        //     $row[] = $pesanan->nip;
-        //     $row[] = $pesanan->unit;
-        //     $row[] = $pesanan->nde;
-
-        //     $data[] = $row;
-        // }
-
-        // $output = array(
-        //     "draw" => $_POST['draw'],
-        //     "recordsTotal" => $this->pesanan->count_all(),
-        //     "recordsFiltered" => $this->pesanan->count_filtered(),
-        //     "data" => $data,
-        // );
-        // //output to json format
-        // echo json_encode($output);
-    }
-
-    function get_ajax()
-    {
-        $list = $this->Pesanan_model->get_datatables();
+        $list = $this->PesananA_model->get_datatables();
         $data = array();
-        $no = @$_POST['start'];
+        $no = $_POST['start'];
+        $status =  null;
         foreach ($list as $item) {
             $no++;
+
+            if ($item->status == "1") {
+                $status = '<div class="row justify-content-evenly"><div class="col-4">Proses</div>
+                <div class="col-4"><a type="button" class="btn btn-danger" href="' . site_url('admin/pesanan/updateStatus1/' . $item->id) . '" onclick="return confirm(' . 'Yakin?' . ')">Update</a></div>';
+            } elseif ($item->status == "2") {
+                $status = '<div class="row justify-content-evenly"><div class="col-4">Peminjaman</div>
+                <div class="col-4">
+                <a type="button" class="btn btn-warning" href="' . site_url('admin/pesanan/updateStatus2/' . $item->id) . '" onclick="return confirm(' . 'Yakin?' . ')">Update</a></div>';
+            } elseif ($item->status == "3") {
+                $status = '<div class="row justify-content-evenly"><div class="col-4"><button type="button" class="btn btn-primary">Selesai</button>';
+            }
             $row = array();
+            // <th>No</th>
             $row[] = $no;
+            // <th>Bill No.</th>
             $row[] = $item->id;
-            $row[] = $item->tanggal;
+            // <th>Peminjaman</th>
+            $row[] = $item->tgl_peminjaman;
+            // <th>Pengembalian</th>
+            $row[] = $item->tgl_pengembalian;
+            // <th>Nama</th>
             $row[] = $item->nama;
+            // <th>Unit</th>
             $row[] = $item->nip;
+            // <th>NIP</th>
             $row[] = $item->unit;
-            $row[] = $item->nde;
-            // $row[] = $no . ".";
-            // $row[] = $item->barcode . '<br><a href="' . site_url('item/barcode_qrcode/' . $item->item_id) . '" class="btn btn-default btn-xs">Generate <i class="fa fa-barcode"></i></a>';
-            // $row[] = $item->name;
-            // $row[] = $item->category_name;
-            // $row[] = $item->unit_name;
-            // $row[] = indo_currency($item->price);
-            // $row[] = $item->stock;
-            // $row[] = $item->image != null ? '<img src="' . base_url('uploads/product/' . $item->image) . '" class="img" style="width:100px">' : null;
-            // // add html for action
-            // $row[] = '<a href="' . site_url('item/edit/' . $item->item_id) . '" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
-            //         <a href="' . site_url('item/del/' . $item->item_id) . '" onclick="return confirm(\'Yakin hapus data?\')"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>';
+            // <th>NDE</th>
+            $row[] = '<a type="button" class="btn btn-light" href="' . $item->nde . '">Download</a>';
+            // <th>Status</th>
+            $row[] = $status;
+            // <th>Surat Berita</th>
+            $row[] = '<div class="col-4">
+            <div class="dropdown">
+                <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Surat Berita
+                </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="' . site_url('admin/pesanan/printAll/' . $item->id) . '" target="_blank">
+                        Print Semua Berita
+                    </a></li>
+                <li><a class="dropdown-item" href="' . site_url('admin/pesanan/printPenyerahan/' . $item->id) . '" target="_blank">
+                        Print Penyerahan
+                    </a></li>
+                <li><a class="dropdown-item" href="' . site_url('admin/pesanan/printPengembalian/' . $item->id) . '" target="_blank">
+                        Print Pengembalian
+                    </a></li>
+            </ul>
+        </div>';
             $data[] = $row;
         }
+
         $output = array(
-            "draw" => @$_POST['draw'],
-            "recordsTotal" => $this->item_m->count_all(),
-            "recordsFiltered" => $this->item_m->count_filtered(),
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->PesananA_model->count_all(),
+            "recordsFiltered" => $this->PesananA_model->count_filtered(),
             "data" => $data,
         );
-        // output to json format
+        //output to json format
         echo json_encode($output);
-    }
-
-    public function ambildata()
-    {
-        // header('Content-Type: application/json');
-        if ($this->input->is_ajax_request() == TRUE) {
-            $this->load->model('Pesanan_model', 'pesanan');
-            $list = $this->pesanan->get_datatables();
-            $data = array();
-            $no = $_POST['start'];
-            foreach ($list as $field) {
-
-                $no++;
-                $row = array();
-                // array(null, 'id', 'tanggal', 'nama', 'nip', 'unit', 'nde')
-                $row[] = $no;
-                $row[] = $field->id;
-                $row[] = $field->tanggal;
-                $row[] = $field->nama;
-                $row[] = $field->nip;
-                $row[] = $field->unit;
-                $row[] = $field->nde;
-                $data[] = $row;
-            }
-
-            $output = array(
-                "draw" => $_POST['draw'],
-                "recordsTotal" => $this->pesanan->count_all(),
-                "recordsFiltered" => $this->pesanan->count_filtered(),
-                "data" => $data,
-            );
-            //output dalam format JSON
-            echo json_encode($output);
-        } else {
-            exit('Maaf data tidak bisa ditampilkan');
-        }
     }
 
     function tambah()
@@ -140,7 +110,7 @@ class Pesanan extends CI_Controller
         $session_data = $this->session->userdata('logged_in');
         $lvl = $session_data['level'];
         if ($lvl == "2") {
-            redirect('user/Homepage');
+            redirect('homepage');
         }
 
         $config['allowed_types'] = 'pdf';
@@ -150,13 +120,11 @@ class Pesanan extends CI_Controller
         $this->load->library('upload', $config);
 
         $data['judul'] = "Tambah Pesanan";
+        $data['nav_pesanan'] = 1;
         $data['produk'] = $this->Pesanan_model->getAllProduk();
 
-        $data['json'] = $this->Pesanan_model->getJson();
-
-        // echo json_encode(json_decode($json), JSON_PRETTY_PRINT);
-
-        $this->form_validation->set_rules('tgl', 'Tanggal', 'required');
+        $this->form_validation->set_rules('tgl-awal', 'Tanggal', 'required');
+        $this->form_validation->set_rules('tgl-akhir', 'Tanggal', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('nip', 'NIP', 'required');
         $this->form_validation->set_rules('unit', 'Unit', 'required');
@@ -164,10 +132,9 @@ class Pesanan extends CI_Controller
 
         if ($this->form_validation->run() == FALSE && !$this->upload->do_upload('nde')) {
             $this->load->view('templates/header', $data);
-            $this->load->view('admin/navbar');
+            $this->load->view('admin/navbar', $data);
             $this->load->view('admin/pesanan/add', $data);
             $this->load->view('templates/footer');
-            // $this->load->view('user/test', $error);
         } else {
             // mengambil nama file            
             $pdf = $this->upload->data();
@@ -182,17 +149,19 @@ class Pesanan extends CI_Controller
             $count = $this->Pesanan_model->countDataUsername($username);
             $count++;
 
-            // id day month year (now) + no urut sekarang
-            $id = date('dmy') . sprintf("%03s", $id) . sprintf("%03s", $count);
+            // id pesanan = day month year (now) + id + no urut sekarang
+            $id = date('ymd') . sprintf("%03s", $id) . sprintf("%03s", $count);
 
             $master = array(
                 "id" => $id,
                 "username" => $username,
-                "tanggal" => $this->input->post('tgl', true),
+                "tgl_peminjaman" => $this->input->post('tgl-awal', true),
+                "tgl_pengembalian" => $this->input->post('tgl-akhir', true),
                 "nama" => $this->input->post('nama', true),
                 "nip" => $this->input->post('nip', true),
                 "unit" => $this->input->post('unit', true),
-                "nde" => $pdf
+                "nde" => $pdf,
+                "status" => "1"
             );
 
             $produk = $this->input->post('produk', true);
@@ -238,9 +207,33 @@ class Pesanan extends CI_Controller
     function printAll($id)
     {
         $data['judul'] = "Berita Serah Terima";
-        $this->load->view('templates/header', $data);
         $data['master'] = $this->Pesanan_model->getMasterData($id);
         $data['detail'] = $this->Pesanan_model->getDetailData($id);
+
+        $master = $data['master'];
+        $day1 = $master['tgl_peminjaman'];
+        $day2 = $master['tgl_pengembalian'];
+
+        $day1 = strtotime($day1);
+        $day2 = strtotime($day2);
+
+        $day1 = date('D', $day1);
+        $day2 = date('D', $day2);
+
+        $dayList = array(
+            'Sun' => 'Minggu',
+            'Mon' => 'Senin',
+            'Tue' => 'Selasa',
+            'Wed' => 'Rabu',
+            'Thu' => 'Kamis',
+            'Fri' => 'Jumat',
+            'Sat' => 'Sabtu'
+        );
+
+        $data['day1'] = $dayList[$day1];
+        $data['day2'] = $dayList[$day2];
+
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/printSerah', $data);
         $this->load->view('templates/printTerima', $data);
         $this->load->view('templates/footer');
@@ -251,6 +244,30 @@ class Pesanan extends CI_Controller
         $data['judul'] = "Berita Serah Terima";
         $data['master'] = $this->Pesanan_model->getMasterData($id);
         $data['detail'] = $this->Pesanan_model->getDetailData($id);
+
+        $master = $data['master'];
+        $day1 = $master['tgl_peminjaman'];
+        $day2 = $master['tgl_pengembalian'];
+
+        $day1 = strtotime($day1);
+        $day2 = strtotime($day2);
+
+        $day1 = date('D', $day1);
+        $day2 = date('D', $day2);
+
+        $dayList = array(
+            'Sun' => 'Minggu',
+            'Mon' => 'Senin',
+            'Tue' => 'Selasa',
+            'Wed' => 'Rabu',
+            'Thu' => 'Kamis',
+            'Fri' => 'Jumat',
+            'Sat' => 'Sabtu'
+        );
+
+        $data['day1'] = $dayList[$day1];
+        $data['day2'] = $dayList[$day2];
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/printSerah', $data);
         $this->load->view('templates/footer');
@@ -261,6 +278,30 @@ class Pesanan extends CI_Controller
         $data['judul'] = "Berita Serah Terima";
         $data['master'] = $this->Pesanan_model->getMasterData($id);
         $data['detail'] = $this->Pesanan_model->getDetailData($id);
+
+        $master = $data['master'];
+        $day1 = $master['tgl_peminjaman'];
+        $day2 = $master['tgl_pengembalian'];
+
+        $day1 = strtotime($day1);
+        $day2 = strtotime($day2);
+
+        $day1 = date('D', $day1);
+        $day2 = date('D', $day2);
+
+        $dayList = array(
+            'Sun' => 'Minggu',
+            'Mon' => 'Senin',
+            'Tue' => 'Selasa',
+            'Wed' => 'Rabu',
+            'Thu' => 'Kamis',
+            'Fri' => 'Jumat',
+            'Sat' => 'Sabtu'
+        );
+
+        $data['day1'] = $dayList[$day1];
+        $data['day2'] = $dayList[$day2];
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/printTerima', $data);
         $this->load->view('templates/footer');

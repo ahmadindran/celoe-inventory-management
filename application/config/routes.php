@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -52,3 +52,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['404_error'] = 'user/homepage/error';
+$route['homepage'] = 'user/homepage';
+$route['pesanan'] = 'user/pesanan';
+$route['pesanan/tambah'] = 'user/pesanan/tambah';
+$route['pesanan/printAll/(:any)'] = 'user/pesanan/printAll/$1';
+$route['pesanan/printPenyerahan/(:any)'] = 'user/pesanan/printPenyerahan/$1';
+$route['pesanan/printPengembalian/(:any)'] = 'user/pesanan/printPengembalian/$1';
+$route['pesanan'] = 'user/pesanan';
+$route['pesanan'] = 'user/pesanan';
+$route['akun'] = 'user/akun';
+$route['akun/gantiProfile'] = 'user/akun/gantiProfile';
+$route['akun/gantiPassword'] = 'user/akun/gantiPassword';

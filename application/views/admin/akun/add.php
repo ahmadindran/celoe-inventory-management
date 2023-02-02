@@ -33,6 +33,7 @@
                             <div class="col-sm-10">
                                 <input class="form-control" id="password" name="password" type="password" placeholder="Password">
                                 <div class="form-text text-danger"><?= form_error('password'); ?></div>
+                                <div class="small text-muted mt-2">&#9432; Minimal 8 Karakter</div>
                             </div>
                         </div>
                         <div class="mb-3 row">

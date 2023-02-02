@@ -22,14 +22,11 @@ class Login extends CI_Controller
                 $data['judul'] = 'Login';
                 $this->load->view('templates/header', $data);
                 $this->load->view('login/index');
-                $this->load->view('templates/footer');
             }
         } else {
             $data['judul'] = 'Login';
-            $this->load->helper(array('form'));
             $this->load->view('templates/header', $data);
             $this->load->view('login/index');
-            $this->load->view('templates/footer');
         }
     }
 
@@ -43,7 +40,7 @@ class Login extends CI_Controller
             $sess_array = array();
             foreach ($result as $row) {
                 $sess_array = array(
-                    'id' => $row->id_user,
+                    'id' => $row->id,
                     'username' => $row->username,
                     'nama' => $row->nama,
                     'email' => $row->email,
@@ -53,8 +50,12 @@ class Login extends CI_Controller
             }
             if ($sess_array['level'] == "1") {
                 redirect('admin/homepage');
+            } elseif ($sess_array['level'] == "3") {
+                redirect('admin/homepage');
             } elseif ($sess_array['level'] == "2") {
-                redirect('user/homepage');
+                redirect('homepage');
+            } elseif ($sess_array['level'] == "0") {
+                redirect('404_error');
             }
             return TRUE;
         } else {

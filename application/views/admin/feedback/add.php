@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Tambah Feedback
+                    <?php echo $judul; ?>
                 </div>
                 <div class="card-body">
                     <form action="" method="post">

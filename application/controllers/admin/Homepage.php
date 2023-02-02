@@ -7,8 +7,12 @@ class Homepage extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Pesanan_model');
+        $this->load->model('Homepage_model');
         if (!$this->session->userdata('logged_in')) {
-            $pemberitahuan = "<div class='alert alert-warning'>Anda harus login dulu </div>";
+            $pemberitahuan = '<div class="alert alert-light mx-auto" style="width: 45%;" role="alert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <strong> Anda harus login terlebih dahulu!</strong>
+            </div>';
             $this->session->set_flashdata('pemberitahuan', $pemberitahuan);
             redirect('login');
         }
@@ -19,17 +23,24 @@ class Homepage extends CI_Controller
         $session_data = $this->session->userdata('logged_in');
         $lvl = $session_data['level'];
         if ($lvl == "2") {
-            redirect('user/Homepage');
+            redirect('homepage');
         }
 
         $data['judul'] = "Homepage Admin";
         $session_data = $this->session->userdata('logged_in');
-        $sesi['nama'] = $session_data['nama'];
-        $sesi['username'] = $session_data['username'];
-        $sesi['email'] = $session_data['email'];
+        $data['nama'] = $session_data['nama'];
+        $data['username'] = $session_data['username'];
+        $data['email'] = $session_data['email'];
+        $data['akun'] = $this->Homepage_model->countUser();
+        $data['pesanan'] = $this->Homepage_model->countPesanan();
+        $data['proses'] = $this->Homepage_model->countProses();
+        $data['selesai'] = $this->Homepage_model->countSelesai();
+        $data['nav_homepage'] = 1;
+
         $this->load->view('templates/header', $data);
-        $this->load->view('admin/navbar');
-        $this->load->view('admin/index', $sesi);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/connect');
+        $this->load->view('admin/index', $data);
         $this->load->view('templates/footer');
     }
 }
