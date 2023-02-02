@@ -1,3 +1,4 @@
+
 -- phpMyAdmin SQL Dump
 -- version 5.0.1
 -- https://www.phpmyadmin.net/
@@ -115,6 +116,38 @@ CREATE TABLE `order_detail` (
   `banyak` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `order_detail`
+--
+
+-- INSERT INTO `order_detail` (`id`, `produk_id`, `banyak`) VALUES
+-- ('250522000001', 'ABCD', 1),
+-- ('250522000001', 'ABC', 2),
+-- ('080622000002', 'ABCD', 1),
+-- ('080622000002', '8M3D8', 2),
+-- ('080622000002', 'TLPMT', 3),
+-- ('240622000001', '8M3D8', 1),
+-- ('240622000001', 'DZADQ', 2),
+-- ('240622001002', 'DZADQ', 1),
+-- ('240622001002', 'DZADQ', 2),
+-- ('220624001003', 'ABC', 4),
+-- ('220624001003', 'GRNSC', 2),
+-- ('220802001004', 'DZADQ', 1),
+-- ('220802001004', 'QGUZR', 2),
+-- ('220802001004', 'VCCELGATO', 1),
+-- ('010223002001', '8M3D8', 1),
+-- ('010223002001', 'SNA6000', 1),
+-- ('010223002001', 'VCCEZCAP', 1),
+-- ('010223002002', 'DZADQ', 1),
+-- ('010223002002', 'GRNSC', 3),
+-- ('010223002002', 'QGUZR', 2),
+-- ('010223002003', 'MSHURE', 5),
+-- ('010223002003', 'GBTPLINK', 4),
+-- ('010223002003', 'OUUUA', 1),
+-- ('010223002004', 'DZADQ', 1),
+-- ('010223002004', 'ABCD', 2),
+-- ('010223002004', 'VCCELGATO', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -132,6 +165,16 @@ CREATE TABLE `order_master` (
   `nde` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_master`
+--
+
+-- INSERT INTO `order_master` (`id`, `username`, `tgl_peminjaman`, `tgl_pengembalian`, `nama`, `nip`, `unit`, `nde`, `status`) VALUES
+-- ('010223002001', 'user', '06-02-2023', '11-02-2023', 'Adi', '1234567890', 'LAK', '4980d13b77e63cbe68e34429eb3872c9.pdf', 1),
+-- ('010223002002', 'user', '07-02-2023', '11-02-2023', 'Budi', '23456789', 'FIK', 'fd47f315c0ef0a7b76d0403f5ae1864c.pdf', 1),
+-- ('010223002003', 'user', '13-02-2023', '17-02-2023', 'Cici', '987645612', 'FEB', '27e1515c0541da0100e60f73b5284334.pdf', 1),
+-- ('010223002004', 'user', '01-05-2023', '06-05-2023', 'Dedi', '895465123', 'FIT', 'aa44486461e6aa77655bf24ab90f928d.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -191,9 +234,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `nama`, `email`, `password`, `level`) VALUES
-(1, 'admin', 'Admin', 'admin@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 1),
-(2, 'user', 'user', 'user@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 2);
+INSERT INTO `user` (`id`, `username`, `nama`, `email`, `password`, `level`) VALUES
+(1, 'admin', 'Admin', 'admin@gmail.com', '25d55ad283aa400af464c76d713c07ad', 3),
+(2, 'user', 'Dummy Acc', 'user1@gmail.com', '25d55ad283aa400af464c76d713c07ad', 2),
+(3, 'dummy', 'dummy admin', 'admin@dummy.com', '25d55ad283aa400af464c76d713c07ad', 1);
 
 --
 -- Indexes for dumped tables
@@ -270,7 +314,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
